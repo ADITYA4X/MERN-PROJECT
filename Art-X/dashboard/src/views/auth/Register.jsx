@@ -44,7 +44,7 @@ const Register = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor.
               </p>
-              <button className="w-[135px] h-[35px] mt-8 bg-transparent text-gray-400 px-4 rounded-lg font-semibold hover:opacity-90 hover:text-white hover:ring-1 hover:ring-gray-400">
+              <button className="w-[95px] h-[35px] mt-8 bg-transparent text-gray-400 rounded-lg font-semibold hover:opacity-90 hover:text-white ml-[-10]">
                 Learn More...
               </button>
             </div>
