@@ -1,9 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { admin_login } from "../../store/Reducers/authReducer";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { admin_login, messageClear } from "../../store/Reducers/authReducer";
+import { PropagateLoader } from "react-spinners";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { loader, errorMessage, successMessage } = useSelector(
+    (state) => state.auth
+  );
 
   const [state, setState] = useState({
     email: "",
@@ -22,6 +30,26 @@ const AdminLogin = () => {
     dispatch(admin_login(state));
     // console.log(state);
   };
+
+  const overrideStyle = {
+    display: "flex",
+    margin: "0 auto",
+    height: "24px",
+    justifyContent: "center",
+    alignItem: "center",
+  };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      navigate("/");
+    }
+  }, [dispatch, errorMessage, successMessage, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-white flex justify-center items-center">
@@ -88,8 +116,15 @@ const AdminLogin = () => {
               />
             </div>
 
-            <button className="w-full bg-gradient-to-r from-gray-500 to-gray-800 text-white py-2 px-4 rounded-3xl font-semibold hover:opacity-90 hover:text-black hover:ring-2 hover:ring-gray-500 mb-1">
-              Submit
+            <button
+              disabled={loader ? true : false}
+              className="w-full bg-gradient-to-r from-gray-500 to-gray-800 text-white py-2 px-4 rounded-3xl font-semibold hover:opacity-90 hover:text-black hover:ring-2 hover:ring-gray-500 mb-2"
+            >
+              {loader ? (
+                <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
+              ) : (
+                "Log In"
+              )}
             </button>
           </form>
         </div>
