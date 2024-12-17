@@ -60,7 +60,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             />
           </Link>
         </div>
-        <div className="px-[4px] mt-[148px] ">
+        <div className="px-[4px] mt-[120px] ">
           <ul>
             {allNav.map((n, i) => (
               <li key={i}>
@@ -78,9 +78,9 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
               </li>
             ))}
           </ul>
-          <div className="px-[4px] mt-[260px]">
+          <div className="px-[4px] mt-[110px]">
             <li>
-              <button className="text-gray-500 font-bold duration-200 px-[32px] py-[2px] flex justify-start items-center gap-[12px] hover:pl-[36px] transition-all w-full mb-8 text-xl ">
+              <button className="text-gray-500 font-bold duration-200 px-[32px] py-[2px] flex justify-start items-center gap-[12px] hover:pl-[36px] transition-all w-full mb-2 text-xl ">
                 <span>
                   <TbLogout2 />
                 </span>
@@ -89,7 +89,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
             </li>
           </div>
 
-          <div className="px-[4px] mt-[60px] ">
+          <div className="px-[4px] mt-[32px] ">
             <li>
               <button className="text-gray-400 font-bold duration-200 px-[32px]  flex justify-start items-center gap-[12px]  w-full text-lg ">
                 <span className="text-xl">
