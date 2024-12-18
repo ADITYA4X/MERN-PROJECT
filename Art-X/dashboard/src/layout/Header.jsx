@@ -8,7 +8,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
       <div className="ml-0 lg:ml-[310px] h-[130px] flex justify-between items-center px-5 transition-all ">
         <div
           onClick={() => setShowSidebar(!showSidebar)}
-          className="w-[35px] flex lg:hidden h-[35px] rounded-sm bg-transparent text-white text-2xl shadow-lg hover:bg-white hover:text-black hover:shadow-gray-300/50 justify-center items-center cursor-pointer"
+          className="w-[35px] flex lg:hidden h-[35px] rounded-sm bg-transparent text-stone-700 text-2xl shadow-lg hover:bg-white hover:text-black hover:shadow-gray-300/50 justify-center items-center cursor-pointer"
         >
           <span>
             <FaList />
@@ -28,7 +28,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
         <div className="flex justify-center items-center gap-[130px]">
           <div className="relative hidden md:block left-16">
             <input
-              className="h-[48px] pl-14 pr-1 py-1 outline-none border bg-[#e1e0e0] rounded-full text-stone-800 text-lg font-semibold overflow-hidden focus:outline-none focus:ring-1 focus:ring-stone-400
+              className="h-[48px] pl-14 pr-1 py-1 outline-none border border-stone-400 bg-stone-200 rounded-full text-stone-800 text-lg font-semibold overflow-hidden focus:outline-none focus:ring-1 focus:ring-stone-300
               focus:w-80 transition-all duration-500"
               type="text"
               name="search"
@@ -51,7 +51,6 @@ const Header = ({ showSidebar, setShowSidebar }) => {
                 <img
                   className="w-[42px] h-[42px] rounded-full overflow-hidden"
                   src="http://localhost:3001/images/admin.jpg"
-                  alt=""
                 />
               </div>
             </div>
