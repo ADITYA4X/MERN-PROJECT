@@ -136,7 +136,7 @@ const Category = () => {
                       scope="col"
                       className="py-3 px-4  font-semibold"
                     >
-                      Active
+                      Action
                     </th>
                   </tr>
                 </thead>
