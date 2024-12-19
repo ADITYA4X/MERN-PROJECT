@@ -88,7 +88,7 @@ const Orders = () => {
 
         <div className="relative mt-5 overflow-x-auto">
           <div className="w-full px-3 text-sm text-left bg-white">
-            <div className="text-sm text-stone-800 uppercase border-b border-stone-700">
+            <div className="text-sm text-stone-800 uppercase border-b border-stone-400">
               <div className="flex justify-between items-center">
                 <div className="py-3 w-[22%] font-bold">Order Id</div>
                 <div className="py-3 w-[14%] font-bold">Price</div>
