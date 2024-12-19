@@ -6,7 +6,7 @@ import Pagination from "../Pagination";
 
 const Orders = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(10);
   const [show, setShow] = useState(false);
 

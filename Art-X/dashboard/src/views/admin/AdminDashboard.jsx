@@ -306,8 +306,8 @@ const AdminDashboard = () => {
       </div>
 
       <div className="w-full py-6 px-8 bg-white rounded-[36px] mt-6">
-        <div className="flex justify-between items-center">
-          <h2 className="font-semibold text-bg text-stone-800">
+        <div className="flex justify-between items-center mb-4 px-4">
+          <h2 className="font-semibold text-lg text-stone-800">
             Recent Orders
           </h2>
           <Link className="font-semibold text-sm text-stone-700">View All</Link>
