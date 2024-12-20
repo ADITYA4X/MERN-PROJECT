@@ -5,7 +5,7 @@ import Pagination from "../Pagination";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
 import { TbViewportWide } from "react-icons/tb";
 
-const Sellers = () => {
+const DeactiveSellers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(10);
@@ -38,10 +38,11 @@ const Sellers = () => {
   return (
     <div className="px-9 md:px-9 py-10">
       <div className="w-full p-4 bg-white rounded-[35px]">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-1 py-1 ">
           <h1 className="font-semibold text-xl text-stone-700 pl-4">
-            Sellers List
+            Deactive Seller
           </h1>
+
           <div className="relative md:block ">
             <input
               type="text"
@@ -108,12 +109,8 @@ const Sellers = () => {
                   Name
                 </th>
 
-                <th
-                  id="shopName"
-                  scope="col"
-                  className="py-3 px-8  font-semibold"
-                >
-                  Shop Name
+                <th id="email" scope="col" className="py-3 px-8  font-semibold">
+                  Email
                 </th>
                 <th
                   id="payment"
@@ -122,23 +119,14 @@ const Sellers = () => {
                 >
                   Payment Status
                 </th>
-                <th id="email" scope="col" className="py-3 px-8  font-semibold">
-                  Email
-                </th>
                 <th
-                  id="devision"
+                  id="status"
                   scope="col"
                   className="py-3 px-8  font-semibold"
                 >
-                  Devision
+                  Status
                 </th>
-                <th
-                  id="district"
-                  scope="col"
-                  className="py-3 px-6  font-semibold"
-                >
-                  District
-                </th>
+
                 <th
                   id="action"
                   scope="col"
@@ -175,10 +163,10 @@ const Sellers = () => {
                     Aditya Kumar
                   </td>
                   <td
-                    headers="shopName"
+                    headers="email"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Art-X Canvas
+                    aditya@gmail.com
                   </td>
                   <td
                     headers="payment"
@@ -186,24 +174,11 @@ const Sellers = () => {
                   >
                     <span>Pending</span>
                   </td>
-
                   <td
-                    headers="email"
+                    headers="status"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    aditya@gmail.com
-                  </td>
-                  <td
-                    headers="devision"
-                    className="py-1 px-8 font-medium whitespace-nowrap"
-                  >
-                    Maharastra
-                  </td>
-                  <td
-                    headers="district"
-                    className="py-1 px-8 font-medium whitespace-nowrap"
-                  >
-                    Pune
+                    <span>Deactive</span>
                   </td>
 
                   <td
@@ -236,4 +211,4 @@ const Sellers = () => {
   );
 };
 
-export default Sellers;
+export default DeactiveSellers;
