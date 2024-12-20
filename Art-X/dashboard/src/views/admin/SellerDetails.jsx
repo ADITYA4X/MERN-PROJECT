@@ -91,15 +91,16 @@ const SellerDetails = () => {
                     </table>
                   </div>
 
-                  <div className="flex justify-center items-center gap-2 mb-3 mt-1">
-                    <select className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-7 py-2">
-                      <option>Active</option>
-                      <option>Inactive</option>
+                  <form className="flex justify-center items-center gap-2 mb-3 mt-1">
+                    <select className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-7 py-2 text-center">
+                      <option value="">--Select Status--</option>
+                      <option value="">Active</option>
+                      <option value="">Deactive</option>
                     </select>
                     <button className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2">
                       Submit
                     </button>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
