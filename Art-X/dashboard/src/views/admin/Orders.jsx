@@ -35,8 +35,8 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="px-9 md:px-9 py-10">
-      <div className="w-full p-4 bg-white rounded-[35px]">
+    <div className="lg:px-4 px-2 lg:p-9 py-2  ">
+      <div className="lg:w-full  py-4 lg:px-4 px-[0.5px] bg-white rounded-[35px] overflow-x-auto">
         <div className="flex justify-between items-center">
           <div className="relative md:block ">
             <input
@@ -95,7 +95,7 @@ const Orders = () => {
                 <div className="py-3 w-[18%] font-bold px-1">
                   Payment Status
                 </div>
-                <div className="py-3 w-[20%] font-bold px-1">Order Status</div>
+                <div className="py-3 w-[20%] font-bold pl-2">Order Status</div>
                 <div className="py-3 w-[18%] font-bold">Action</div>
                 <div className="py-3 w-[9%]  text-lg font-bold">
                   <RiArrowDownDoubleLine />
@@ -104,7 +104,7 @@ const Orders = () => {
             </div>
 
             <div className=" text-stone-800 ">
-              <div className="flex px-2 justify-between items-start border-b-[0.5px] border-stone-200">
+              <div className="flex px-2 justify-between items-start border-b-[0.5px] border-stone-200 overflow-x-auto">
                 <div className="py-3 w-[22%] font-medium whitespace-nowrap">
                   #2424
                 </div>

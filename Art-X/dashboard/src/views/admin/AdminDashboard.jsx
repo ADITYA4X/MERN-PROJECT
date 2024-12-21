@@ -58,7 +58,7 @@ const AdminDashboard = () => {
           fontWeight: "semi-bold", // Optional: Make it bold
           color: "#191717", // Optional: Set the title color
         },
-        offsetY: 54,
+        offsetY: 44,
         offsetX: 6,
       },
       dataLabels: {
@@ -101,7 +101,7 @@ const AdminDashboard = () => {
       legend: {
         position: "top",
         horizontalAlign: "right",
-        offsetY: -20,
+        offsetY: -10,
       },
       responsive: [
         {

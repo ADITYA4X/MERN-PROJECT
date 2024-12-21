@@ -36,7 +36,7 @@ const DeactiveSellers = () => {
   }, []);
 
   return (
-    <div className="px-9 md:px-9 py-10">
+    <div className="px-2 lg:px-9 lg:py-10 py-2">
       <div className="w-full p-4 bg-white rounded-[35px]">
         <div className="flex justify-between items-center mb-1 py-1 ">
           <h1 className="font-semibold text-xl text-stone-700 pl-4">
@@ -47,7 +47,7 @@ const DeactiveSellers = () => {
             <input
               type="text"
               placeholder="Search"
-              className="px-2 pl-12 py-2 focus:border-stone-400 outline-none border border-stone-300 rounded-3xl text-stone-600 font-normal"
+              className="px-2 pl-12 py-2  focus:border-stone-400 outline-none border border-stone-300 rounded-3xl text-stone-600 font-normal w-[120px] lg:w-full"
             />
             <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-stone-400 text-md">
               <FaSearch />

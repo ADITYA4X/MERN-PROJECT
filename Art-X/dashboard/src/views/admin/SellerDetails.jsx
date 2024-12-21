@@ -26,8 +26,8 @@ const SellerDetails = () => {
   }, []);
 
   return (
-    <div className="px-9 md:px-9 py-10">
-      <div className="flex lg:hidden justify-between items-center mb-4 py-4 bg-transparent rounded-3xl">
+    <div className="lg:px-9 lg:py-10 py-1 px-2">
+      <div className="flex lg:hidden justify-between items-center lg:mb-4 mb-1 lg:py-4 py-1 bg-transparent rounded-3xl">
         <button
           onClick={() => setShow(true)}
           className="flex justify-center items-center gap-1 bg-stone-600 text-stone-200 px-6 py-2 rounded-3xl hover:bg-stone-700 "
@@ -92,10 +92,16 @@ const SellerDetails = () => {
                   </div>
 
                   <form className="flex justify-center items-center gap-2 mb-3 mt-1">
-                    <select className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-7 py-2 text-center">
-                      <option value="">--Select Status--</option>
-                      <option value="">Active</option>
-                      <option value="">Deactive</option>
+                    <select className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-2 py-2 text-center">
+                      <option className="text-center" value="">
+                        --Select Status--
+                      </option>
+                      <option className="text-center" value="">
+                        Active
+                      </option>
+                      <option className="text-center" value="">
+                        Deactive
+                      </option>
                     </select>
                     <button className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2">
                       Submit

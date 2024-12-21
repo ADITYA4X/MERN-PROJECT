@@ -48,7 +48,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 
       <div
         className={`w-[310px] fixed bg-stone-950 z-50 top-0 h-screen shadow-[0_0_15px_0_rgb(34_41_47_/_10%)] transition-all ${
-          showSidebar ? "left-0" : "-left-[310px] lg:left-0"
+          showSidebar ? "left-0 overflow-y-auto" : "-left-[310px] lg:left-0"
         }`}
       >
         <div className="h-[70px] flex justify-center items-center">

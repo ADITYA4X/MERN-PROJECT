@@ -38,8 +38,8 @@ const Category = () => {
   }, []);
 
   return (
-    <div className="px-9 md:px-9 py-10">
-      <div className="flex lg:hidden justify-between items-center mb-4 py-4 bg-transparent rounded-3xl">
+    <div className="lg:px-9 px-6 lg:py-9 py-0">
+      <div className="flex lg:hidden justify-between items-center lg:mb-4 mb-0 py-4 bg-transparent rounded-3xl">
         <button
           onClick={() => setShow(true)}
           className="flex justify-center items-center gap-1 bg-stone-600 text-stone-200 px-6 py-2 rounded-3xl hover:bg-stone-700 "

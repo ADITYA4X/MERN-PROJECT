@@ -33,7 +33,7 @@ const PaymentRequest = () => {
   };
 
   return (
-    <div className="px-9 md:px-9 py-10">
+    <div className="lg:px-9 px-2 lg:py-9 py-2">
       <div className="w-full p-4 bg-white rounded-[35px]">
         <h2 className="text-xl text-stone-700 font-medium pb-5">
           Withdrawal Request

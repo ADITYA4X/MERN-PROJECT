@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 
 const Header = ({ showSidebar, setShowSidebar }) => {
   return (
-    <div className="fixed top-0 left-0 w-full py-5 px-2 lg:px-7 z-40 bg-white">
+    <div className="fixed top-0 left-0 w-full py-3 px-2 lg:px-7 z-40 bg-white">
       <div className="ml-0 lg:ml-[310px] h-[130px] flex justify-between items-center px-5 transition-all ">
         <div
           onClick={() => setShowSidebar(!showSidebar)}
@@ -51,6 +51,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
                 <img
                   className="w-[42px] h-[42px] rounded-full overflow-hidden"
                   src="http://localhost:3001/images/admin.jpg"
+                  alt=""
                 />
               </div>
             </div>
