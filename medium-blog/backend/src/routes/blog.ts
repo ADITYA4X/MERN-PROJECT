@@ -1,3 +1,4 @@
+import { createBlogInput, updateBlogInput } from "@aditya4x/medium-common";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
@@ -19,15 +20,19 @@ blogRouter.use("/*", async (c, next) => {
 
   // Bearer token => ["Bearer", "token"];
   const token = authHeader.split(" ")[1];
+  try {
+    // verify the jwt
+    const user = await verify(token, c.env.JWT_SECRET);
 
-  // verify the jwt
-  const user = await verify(token, c.env.JWT_SECRET);
-
-  if (user) {
-    c.set("userId", user.id as string);
-    await next();
-  } else {
-    // cant access the Route if not authenticated
+    if (user) {
+      c.set("userId", user.id as string);
+      await next();
+    } else {
+      // cant access the Route if not authenticated
+      c.status(403);
+      return c.json({ message: "You are not logged in" });
+    }
+  } catch {
     c.status(403);
     return c.json({ message: "You are not logged in" });
   }
@@ -36,6 +41,14 @@ blogRouter.use("/*", async (c, next) => {
 // end point to create a new blog
 blogRouter.post("/", async (c) => {
   const body = await c.req.json();
+  const { success } = createBlogInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Inputs not correct",
+    });
+  }
+
   const authorId = c.get("userId");
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -57,6 +70,14 @@ blogRouter.post("/", async (c) => {
 // To update a blog
 blogRouter.put("/", async (c) => {
   const body = await c.req.json();
+  const { success } = updateBlogInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Inputs not correct",
+    });
+  }
+
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
