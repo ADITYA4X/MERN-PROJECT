@@ -19,6 +19,8 @@ userRouter.post("/signup", async (c) => {
   const body = await c.req.json();
   const { success } = signupInput.safeParse(body);
 
+  console.log(success);
+
   if (!success) {
     c.status(411);
     return c.json({
@@ -33,7 +35,7 @@ userRouter.post("/signup", async (c) => {
   try {
     const user = await prisma.user.create({
       data: {
-        email: body.email,
+        email: body.username,
         password: body.password,
       },
     });
