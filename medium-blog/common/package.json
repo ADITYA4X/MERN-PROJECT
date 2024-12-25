@@ -8,8 +8,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "@aditya4x/medium-common": "^1.0.0",
     "zod": "^3.24.1"
-  }
+  },
+  "types": "./dist/index.d.ts",
+  "description": ""
 }
