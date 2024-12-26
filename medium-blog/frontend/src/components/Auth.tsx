@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SignupInput } from "@aditya4x/medium-common";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
+  const navigate = useNavigate();
   const [postInputs, setPostInputs] = useState<SignupInput>({
     name: "",
     username: "",
@@ -13,8 +15,19 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
   async function sendRequest() {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/v1/user/signup`);
-    } catch (error) {}
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        postInputs
+      );
+
+      const jwt = response.data;
+      console.log(jwt);
+      //   const token = jwt.split(" ")[1];
+      localStorage.setItem("token", jwt);
+      navigate("/blogs");
+    } catch (e) {
+      alert("Error while signing up");
+    }
   }
 
   return (
@@ -71,6 +84,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             />
 
             <button
+              onClick={sendRequest}
               type="button"
               className="w-full mt-8 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >

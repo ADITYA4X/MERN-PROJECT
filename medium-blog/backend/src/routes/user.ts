@@ -50,7 +50,7 @@ userRouter.post("/signup", async (c) => {
   }
 });
 
-userRouter.post("/api/v1/signin", async (c) => {
+userRouter.post("/signin", async (c) => {
   const body = await c.req.json();
 
   const { success } = signinInput.safeParse(body);
@@ -66,7 +66,7 @@ userRouter.post("/api/v1/signin", async (c) => {
   }).$extends(withAccelerate());
 
   try {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: {
         email: body.email,
         password: body.password,
