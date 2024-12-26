@@ -12,7 +12,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    const navs = getNav("admin");
+    const navs = getNav("seller");
     setAllNav(navs);
   }, []);
   // console.log(allNav);
