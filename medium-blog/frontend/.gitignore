@@ -11,6 +11,8 @@ pnpm-debug.log*
 .env
 .env.*.local
 
+wrangler.toml
+
 # Build output directories
 dist/
 build/

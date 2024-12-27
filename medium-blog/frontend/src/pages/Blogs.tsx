@@ -1,42 +1,31 @@
 import { Appbar } from "../components/Appbar";
 import { BlogCard } from "../components/BlogCard";
+import { useBlogs } from "../hooks";
 
 export const Blogs = () => {
+  const { loading, blogs } = useBlogs();
+
+  console.log(blogs);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Appbar />
       <div className=" flex justify-center">
-        <div className=" max-w-xl">
-          <BlogCard
-            authorName={"Aditya Kumar"}
-            title={
-              "The Evolution of Software Development: New Tools, Trends, and Techniques for Developers "
-            }
-            content={
-              "Software development has undergone a remarkable transformation over the decades, evolving from basic coding practices to a sophisticated discipline that drives modern innovation. Today, developers operate in a landscape shaped by powerful tools, emerging trends, and advanced techniques that make building software faster, more efficient, and more collaborative. This article explores the journey of software development and highlights the most impactful advancements shaping the industry today."
-            }
-            publishedDate={"16 Dec 2024"}
-          />
-          <BlogCard
-            authorName={"Aditya Kumar"}
-            title={
-              "The Evolution of Software Development: New Tools, Trends, and Techniques for Developers "
-            }
-            content={
-              "Software development has undergone a remarkable transformation over the decades, evolving from basic coding practices to a sophisticated discipline that drives modern innovation. Today, developers operate in a landscape shaped by powerful tools, emerging trends, and advanced techniques that make building software faster, more efficient, and more collaborative. This article explores the journey of software development and highlights the most impactful advancements shaping the industry today."
-            }
-            publishedDate={"16 Dec 2024"}
-          />
-          <BlogCard
-            authorName={"Aditya Kumar"}
-            title={
-              "The Evolution of Software Development: New Tools, Trends, and Techniques for Developers "
-            }
-            content={
-              "Software development has undergone a remarkable transformation over the decades, evolving from basic coding practices to a sophisticated discipline that drives modern innovation. Today, developers operate in a landscape shaped by powerful tools, emerging trends, and advanced techniques that make building software faster, more efficient, and more collaborative. This article explores the journey of software development and highlights the most impactful advancements shaping the industry today."
-            }
-            publishedDate={"16 Dec 2024"}
-          />
+        <div>
+          {blogs.map((blog) => (
+            <BlogCard
+              key={blog.title}
+              id={blog.id}
+              authorName={blog.author.name || "Author"}
+              title={blog.title}
+              content={blog.content}
+              publishedDate={"16 Dec 2024"}
+            />
+          ))}
         </div>
       </div>
     </div>
