@@ -39,14 +39,12 @@ export const BlogCard = ({
         <div className=" text-stone-500 text-sm font-thin pt-4">{`${Math.ceil(
           content.length / 100
         )} minute(s) read`}</div>
-
-        <div></div>
       </div>
     </Link>
   );
 };
 
-function Circle() {
+export function Circle() {
   return <div className="h-1 w-1 rounded-full bg-stone-400"></div>;
 }
 
