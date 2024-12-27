@@ -53,7 +53,7 @@ export function Avatar({
   size = "small",
 }: {
   name: string;
-  size: "small" | "big";
+  size?: "small" | "big";
 }) {
   const initials = name
     .split(" ") // Split the name into an array
