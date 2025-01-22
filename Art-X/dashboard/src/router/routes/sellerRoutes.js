@@ -4,7 +4,11 @@ const Home = lazy(() => import("../../views/Home"));
 const SellerDashboard = lazy(() =>
   import("../../views/seller/SellerDashboard")
 );
-const AddProduct = lazy(() => import("../../views/seller/AddProduct"));
+const AddPainting = lazy(() => import("../../views/seller/AddPainting"));
+const AllPaintings = lazy(() => import("../../views/seller/AllPaintings"));
+const DiscountPaintings = lazy(() =>
+  import("../../views/seller/DiscountPaintings")
+);
 
 export const sellerRoutes = [
   {
@@ -18,8 +22,18 @@ export const sellerRoutes = [
     ability: ["seller"],
   },
   {
-    path: "/seller/dashboard/add-product",
-    element: <AddProduct />,
+    path: "/seller/dashboard/add-painting",
+    element: <AddPainting />,
+    ability: ["seller"],
+  },
+  {
+    path: "/seller/dashboard/all-paintings",
+    element: <AllPaintings />,
+    ability: ["seller"],
+  },
+  {
+    path: "/seller/dashboard/discount-paintings",
+    element: <DiscountPaintings />,
     ability: ["seller"],
   },
 ];

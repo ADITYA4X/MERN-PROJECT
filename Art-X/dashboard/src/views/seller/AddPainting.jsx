@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { IoMdImages } from "react-icons/io";
 import { IoMdCloseCircle } from "react-icons/io";
 
-const AddProduct = () => {
+const AddPainting = () => {
   const categorys = [
     {
       id: 1,
@@ -115,16 +115,21 @@ const AddProduct = () => {
     <div className="px-2 lg:px-7 pt-5">
       <div className="w-full p-4 bg-white rounded-3xl">
         <div className="flex justify-between items-center pb-4">
-          <h1 className="text-stone-800 text-xl font-semibold">Add Product</h1>
-          <Link className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2">
-            All Product
+          <h1 className="text-stone-800 text-xl font-semibold">
+            Add Painting :
+          </h1>
+          <Link
+            to="/seller/dashboard/all-paintings"
+            className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2"
+          >
+            All Painting
           </Link>
         </div>
         <div>
           <form>
             <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-stone-800">
               <div className="flex flex-col w-full gap-1">
-                <label htmlFor="name">Product Name</label>
+                <label htmlFor="name">Painting Name</label>
                 <input
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
@@ -136,7 +141,7 @@ const AddProduct = () => {
                 />
               </div>
               <div className="flex flex-col w-full gap-1 text-stone-800">
-                <label htmlFor="brand">Product Brand</label>
+                <label htmlFor="brand">Painting Type</label>
                 <input
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
@@ -144,14 +149,14 @@ const AddProduct = () => {
                   type="text"
                   name="brand"
                   id="brand"
-                  placeholder="Brand Name"
+                  placeholder="Oil, WaterColor, Digital..."
                 />
               </div>
             </div>
 
             <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-stone-800">
               <div className="flex flex-col w-full gap-1 relative">
-                <label htmlFor="category">Category</label>
+                <label htmlFor="category">Painting Category</label>
                 <input
                   readOnly
                   onClick={() => setCateShow(!cateShow)}
@@ -163,7 +168,7 @@ const AddProduct = () => {
                   placeholder="--select category--"
                 />
                 <div
-                  className={`absolute top-[101%] bg-stone-500 w-full transition-all overflow-scroll ${
+                  className={`absolute top-[101%] bg-stone-500 w-full transition-all rounded-md  ${
                     cateShow ? "scale-100" : "scale-0"
                   } `}
                 >
@@ -177,7 +182,7 @@ const AddProduct = () => {
                     />
                   </div>
                   <div className="pt-14"></div>
-                  <div className="flex justify-start items-start flex-col h-[200px] overflow-x-scrool">
+                  <div className="flex justify-start items-start flex-col h-[200px] overflow-y-scroll">
                     {allCategory.map((c, i) => (
                       <span
                         className={`px-4 py-2 focus:border-stone-900 hover:text-white hover:shadow-lg w-full cursor-pointer ${
@@ -198,7 +203,7 @@ const AddProduct = () => {
               </div>
 
               <div className="flex flex-col w-full gap-1">
-                <label htmlFor="stock">Product Stock</label>
+                <label htmlFor="stock">Painting Stock</label>
                 <input
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
@@ -254,7 +259,7 @@ const AddProduct = () => {
               ></textarea>
             </div>
 
-            <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full text-[#d0d2d6] mb-4">
+            <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full text-stone-600 mb-4 ">
               {imageShow.map((img, i) => (
                 <div className="h-[180px] relative">
                   <label htmlFor={i}>
@@ -272,7 +277,7 @@ const AddProduct = () => {
                   />
                   <span
                     onClick={() => removeImage(i)}
-                    className="p-2 z-10 cursor-pointer bg-slate-700 hover:shadow-lg hover:shadow-slate-400/50 text-white absolute top-1 right-1 rounded-full"
+                    className="p-2 z-10 cursor-pointer bg-slate-700 hover:shadow-lg hover:shadow-slate-400/50 text-stone-500 absolute top-1 right-1 rounded-full"
                   >
                     <IoMdCloseCircle />
                   </span>
@@ -280,7 +285,7 @@ const AddProduct = () => {
               ))}
 
               <label
-                className="flex justify-center items-center flex-col h-[180px] cursor-pointer border border-dashed hover:border-stone-900 w-full text-stone-500"
+                className="flex justify-center items-center flex-col h-[180px] cursor-pointer border border-dashed border-stone-400 hover:border-stone-900 w-full text-stone-500"
                 htmlFor="image"
               >
                 <span>
@@ -308,4 +313,4 @@ const AddProduct = () => {
     </div>
   );
 };
-export default AddProduct;
+export default AddPainting;
