@@ -9,6 +9,7 @@ const AllPaintings = lazy(() => import("../../views/seller/AllPaintings"));
 const DiscountPaintings = lazy(() =>
   import("../../views/seller/DiscountPaintings")
 );
+const Orders = lazy(() => import("../../views/seller/Orders"));
 
 export const sellerRoutes = [
   {
@@ -34,6 +35,11 @@ export const sellerRoutes = [
   {
     path: "/seller/dashboard/discount-paintings",
     element: <DiscountPaintings />,
+    ability: ["seller"],
+  },
+  {
+    path: "/seller/dashboard/orders",
+    element: <Orders />,
     ability: ["seller"],
   },
 ];

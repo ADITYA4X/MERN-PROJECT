@@ -123,7 +123,7 @@ const AllPaintings = () => {
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Feathers
+                    Shri Krishna
                   </td>
                   <td
                     headers="payment"
@@ -135,7 +135,7 @@ const AllPaintings = () => {
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Thangka
+                    Madhubani
                   </td>
                   <td
                     headers="payment"
