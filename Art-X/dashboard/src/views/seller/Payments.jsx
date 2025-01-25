@@ -91,7 +91,7 @@ const Payments = () => {
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 pb-4">
         <div className="bg-white text-black rounded-3xl p-5">
-          <h2 className="text-lg font-semibold">Send Request</h2>
+          <h2 className="text-xl font-semibold">Send Request</h2>
           <div className="pt-5 mb-5">
             <form>
               <div className="flex gap-3 flex-wrap">
@@ -108,7 +108,7 @@ const Payments = () => {
             </form>
           </div>
           <div>
-            <h2 className="text-lg pb-4 font-semibold">Pending Request </h2>
+            <h2 className="text-xl pb-4 font-semibold">Pending Request </h2>
 
             <div className="w-full overflow-x-auto">
               <div className="flex bg-white uppercase text-md min-w-[340px]  font-semibold   text-stone-900  border-b border-stone-400 px-2">
@@ -121,8 +121,8 @@ const Payments = () => {
                 <List
                   style={{ minWidth: "340px" }}
                   className="List font-semibold"
-                  height={500}
-                  itemCount={15}
+                  height={600}
+                  itemCount={17}
                   itemSize={33}
                   outerElementType={outerElementType}
                 >
@@ -135,7 +135,7 @@ const Payments = () => {
 
         <div className="bg-white text-black rounded-3xl p-5">
           <div>
-            <h2 className="text-lg pb-4 font-semibold">Success Withdrawal </h2>
+            <h2 className="text-xl pb-4 font-semibold">Success Withdrawal </h2>
             <div className="w-full overflow-x-auto">
               <div className="flex bg-white uppercase text-md min-w-[340px]  font-semibold   text-stone-900  border-b border-stone-400 px-2">
                 <div className="w-[25%] px-4 py-2">No</div>
@@ -147,8 +147,8 @@ const Payments = () => {
                 <List
                   style={{ minWidth: "340px" }}
                   className="List font-semibold"
-                  height={500}
-                  itemCount={15}
+                  height={700}
+                  itemCount={20}
                   itemSize={33}
                   outerElementType={outerElementType}
                 >

@@ -111,7 +111,7 @@ export const allNav = [
     title: "Chat-Customer",
     icon: <MdDashboard />,
     role: "seller",
-    path: "/seller/dashboard/chat-custome",
+    path: "/seller/dashboard/chat-customer",
   },
   {
     id: 16,
