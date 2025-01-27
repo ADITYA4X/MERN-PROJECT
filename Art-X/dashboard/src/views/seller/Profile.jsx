@@ -21,7 +21,7 @@ const Profile = () => {
                   <img
                     src="http://localhost:3001/images/demo.jpg"
                     alt=""
-                    className="h-[140px] w-[180px] rounded-3xl"
+                    className="h-[150px] w-[180px] rounded-3xl"
                   />
 
                   {!loader && (
@@ -155,14 +155,13 @@ const Profile = () => {
                       placeholder="Sub District Name"
                     />
                   </div>
-                  <div className="flex justify-center">
-                    <button className="bg-stone-700  hover:bg-black hover:text-white text-stone-300 rounded-3xl px-7 py-2 my-2">
-                      Save Changes
-                    </button>
-                  </div>
+
+                  <button className="bg-stone-700  hover:bg-black hover:text-white text-stone-300 rounded-3xl px-7 py-2 my-2 mt-4">
+                    Save Changes
+                  </button>
                 </form>
               ) : (
-                <div className="flex justify-between text-sm font-semibold flex-col gap-2 p-4 bg-stone-200 rounded-3xl relative">
+                <div className="flex justify-between text-sm font-semibold flex-col gap-2 p-4 bg-stone-200 rounded-3xl relative mt-2">
                   <span className="p-[6px] bg-stone-900 hover:shadow-lg rounded-xl  hover:shadow-stone-500/50 absolute right-2 top-2 cursor-pointer">
                     <MdEditSquare className="text-stone-300" />{" "}
                   </span>
@@ -171,23 +170,70 @@ const Profile = () => {
                     <span>Art-X Gallery</span>
                   </div>
                   <div className="flex gap-2">
-                    <span>Divission : </span>
-                    <span>Pune</span>
+                    <span>State : </span>
+                    <span>Maharastra</span>
                   </div>
                   <div className="flex gap-2">
                     <span>District : </span>
                     <span>Pune</span>
                   </div>
                   <div className="flex gap-2">
-                    <span>Sub District : </span>
-                    <span>Pune</span>
+                    <span>PinCode : </span>
+                    <span>440011</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span>Mobile No. : </span>
+                    <span>**********</span>
                   </div>
                 </div>
               )}
             </div>
           </div>
         </div>
-        <div className="w-full md:w-6/12"></div>
+
+        <div className="w-full md:w-6/12">
+          <div className="w-full pl-0 md:pl-7 mt-6 md:mt-0">
+            <div className=" bg-stone-400 rounded-3xl text-black p-4">
+              <h1 className="text-stone-800 text-xl mb-3">Change Password</h1>
+              <form>
+                <div className="flex flex-col w-full gap-1 mb-2">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="email"
+                  />
+                </div>
+                <div className="flex flex-col w-full gap-1 mb-2">
+                  <label htmlFor="o_password">Old Password</label>
+                  <input
+                    className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
+                    type="password"
+                    name="old_password"
+                    id="o_password"
+                    placeholder="Old Password"
+                  />
+                </div>
+                <div className="flex flex-col w-full gap-1 mb-2">
+                  <label htmlFor="n_password">New Password</label>
+                  <input
+                    className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
+                    type="password"
+                    name="new_password"
+                    id="n_password"
+                    placeholder="New Password"
+                  />
+                </div>
+
+                <button className="bg-stone-700  hover:bg-black hover:text-white text-stone-300 rounded-3xl px-7 py-2 my-2 mt-4">
+                  Save Changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
