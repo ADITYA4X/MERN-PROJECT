@@ -97,10 +97,7 @@ const EditPainting = () => {
       stock: 10,
     });
     setCategory("Madhubani");
-    setImageShow([
-      "http://localhost:3001/images/category/1.jpg",
-      "http://localhost:3001/images/category/5.jpg",
-    ]);
+    setImageShow(["http://localhost:3001/images/category/1.jpg", ,]);
   }, []);
 
   return (

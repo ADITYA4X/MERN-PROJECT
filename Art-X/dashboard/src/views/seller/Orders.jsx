@@ -100,7 +100,10 @@ const Orders = () => {
                     className="py-1 px-4 font-medium whitespace-nowrap"
                   >
                     <div className="flex justify-start items-center gap-3">
-                      <Link className="p-[6px] bg-stone-300 rounded hover:shadow-lg hover:shadow-stone-500/20">
+                      <Link
+                        to={`/seller/dashboard/order/details/42`}
+                        className="p-[6px] bg-stone-300 rounded hover:shadow-lg hover:shadow-stone-500/20"
+                      >
                         <TbEyeBolt />
                       </Link>
                     </div>
