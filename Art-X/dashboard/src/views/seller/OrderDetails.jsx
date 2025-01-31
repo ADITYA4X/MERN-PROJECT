@@ -9,7 +9,7 @@ const OrderDetails = () => {
 
   return (
     <div className="lg:px-9 px:2 lg:py-9 py-3">
-      <div className="w-full p-8 bg-white rounded-[35px] ">
+      <div className="w-full h-full p-8 bg-white rounded-[35px] ">
         <div>
           <div className="flex justify-between items-center px-4">
             <div className="flex justify-center items-center gap-2">
@@ -48,10 +48,10 @@ const OrderDetails = () => {
         </div>
 
         {/*  */}
-        <div className="flex w-full h-full relative mt-4 p-4 justify-center">
+        <div className="flex w-full h-full mt-4 p-4 justify-center">
           <div
-            className="h-full absolute z-10
-             w-full md:left-0 md:relative transition-all rounded-3xl bg-stone-200 pb-8"
+            className=" absolute z-10
+             w-full md:relative transition-all rounded-3xl bg-stone-200 pb-8"
           >
             <div className="w-full h-full  overflow-y-auto px-6 rounded-3xl">
               <div className="flex text-xl justify-between items-center p-4  md:p-0 md:px-3 md:pb-3 text-stone-800 mt-4 ">
