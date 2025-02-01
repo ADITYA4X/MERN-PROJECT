@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { PropagateLoader } from "react-spinners";
+import { overrideStyle } from "../../utils/utils";
+import { seller_register } from "../../store/Reducers/authReducer";
 
 const Register = () => {
+  const dispatch = useDispatch();
+
+  const { loader } = useSelector((state) => state.auth);
+
   const [state, setState] = useState({
     name: "",
     email: "",
@@ -20,6 +28,7 @@ const Register = () => {
   const submit = (e) => {
     e.preventDefault();
     console.log(state);
+    dispatch(seller_register(state));
   };
 
   return (
@@ -130,8 +139,15 @@ const Register = () => {
                   </label>
                 </div>
 
-                <button className="w-full px-4 py-2 rounded-3xl bg-black bg-opacity-90 text-white placeholder-gray-500 focus:outline-none focus:bg-white focus:text-black focus:ring-1 focus:ring-white">
-                  Submit
+                <button
+                  disabled={loader ? true : false}
+                  className="w-full px-4 py-2 rounded-3xl bg-black bg-opacity-90 text-white placeholder-gray-500 focus:outline-none focus:bg-white focus:text-black hover:ring-1 hover:ring-stone-700"
+                >
+                  {loader ? (
+                    <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
+                  ) : (
+                    "Sign Up"
+                  )}
                 </button>
 
                 <div className="flex items-center mb-3 gap-3 justify-center text-black">

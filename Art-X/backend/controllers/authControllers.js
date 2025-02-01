@@ -34,6 +34,13 @@ class authControllers {
     }
   }; // End admin_login Method
 
+  seller_register = async (req, res) => {
+    console.log(req.body);
+    const { email, name, password } = req.body;
+  };
+
+  // End seller_register Method
+
   getUser = async (req, res) => {
     const { id, role } = req;
 

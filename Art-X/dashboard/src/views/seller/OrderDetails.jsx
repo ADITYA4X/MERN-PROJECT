@@ -51,7 +51,7 @@ const OrderDetails = () => {
         <div className="flex w-full h-full mt-4 p-4 justify-center">
           <div
             className=" absolute z-10
-             w-full md:relative transition-all rounded-3xl bg-stone-200 pb-8"
+             w-full md:left-0 md:relative transition-all rounded-3xl bg-stone-200 pb-8"
           >
             <div className="w-full h-full  overflow-y-auto px-6 rounded-3xl">
               <div className="flex text-xl justify-between items-center p-4  md:p-0 md:px-3 md:pb-3 text-stone-800 mt-4 ">
