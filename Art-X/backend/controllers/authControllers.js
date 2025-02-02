@@ -2,6 +2,8 @@ const adminModel = require("../models/adminModel");
 const { responseReturn } = require("../utiles/response");
 const bcrypt = require("bcrypt");
 const { createToken } = require("../utiles/tokenCreate");
+const sellerModel = require("../models/sellerModel");
+const sellerCustomerModel = require("../models/chat/sellerCustomerModel");
 
 class authControllers {
   admin_login = async (req, res) => {
@@ -35,8 +37,38 @@ class authControllers {
   }; // End admin_login Method
 
   seller_register = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { email, name, password } = req.body;
+
+    try {
+      const getUser = await sellerModel.findOne({ email });
+      if (getUser) {
+        responseReturn(res, 404, { error: "Email Already Exit" });
+      } else {
+        const seller = await sellerModel.create({
+          name,
+          email,
+          password: await bcrypt.hash(password, 10),
+          method: "menualy",
+          shopInfo: {},
+        });
+        console.log(seller);
+
+        await sellerCustomerModel.create({
+          myId: seller.id,
+        });
+
+        const token = await createToken({ id: seller.id, role: seller.role });
+        res.cookie("accessToken", token, {
+          expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        });
+
+        responseReturn(res, 201, { token, message: "Register Success" });
+      }
+    } catch (error) {
+      // console.log(error);
+      responseReturn(res, 500, { error: "Internal Server Error" });
+    }
   };
 
   // End seller_register Method
