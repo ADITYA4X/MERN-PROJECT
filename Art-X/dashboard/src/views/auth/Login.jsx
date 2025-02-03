@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa6";
+import { PropagateLoader } from "react-spinners";
+import toast from "react-hot-toast";
+import { overrideStyle } from "../../utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { messageClear, seller_login } from "../../store/Reducers/authReducer";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { loader, errorMessage, successMessage } = useSelector(
+    (state) => state.auth
+  );
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -19,7 +30,19 @@ const Login = () => {
   const submit = (e) => {
     e.preventDefault();
     console.log(state);
+    dispatch(seller_login(state));
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-white flex justify-center items-center">
@@ -83,8 +106,15 @@ const Login = () => {
               />
             </div>
 
-            <button className="w-full bg-gradient-to-r from-gray-500 to-gray-800 text-white py-2 px-4 rounded-3xl font-semibold hover:opacity-90 hover:text-black hover:ring-2 hover:ring-gray-500 mb-1">
-              Submit
+            <button
+              disabled={loader ? true : false}
+              className="w-full bg-gradient-to-r from-gray-500 to-gray-800 text-white py-2 px-4 rounded-3xl font-semibold hover:opacity-90 hover:text-black hover:ring-2 hover:ring-gray-500 mb-2"
+            >
+              {loader ? (
+                <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
+              ) : (
+                "Sign In"
+              )}
             </button>
 
             <div className="flex items-center mb-3 gap-3 justify-center text-gray-500">
