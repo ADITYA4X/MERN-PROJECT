@@ -1,11 +1,15 @@
-import { MdDashboard } from "react-icons/md";
+import { MdAddToPhotos, MdDashboard } from "react-icons/md";
 import { CiViewList } from "react-icons/ci";
 import { BiSolidCategory } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa";
-import { IoIosCard } from "react-icons/io";
+import { IoIosCard, IoMdChatboxes } from "react-icons/io";
 import { FaUserTimes } from "react-icons/fa";
-import { RiGitPullRequestLine } from "react-icons/ri";
+import { RiChatUploadFill, RiGitPullRequestLine } from "react-icons/ri";
 import { HiMiniChatBubbleLeftRight } from "react-icons/hi2";
+import { LuTally4 } from "react-icons/lu";
+import { TbBasketDiscount } from "react-icons/tb";
+import { FaCartFlatbed } from "react-icons/fa6";
+import { BsPersonVideo } from "react-icons/bs";
 
 export const allNav = [
   {
@@ -74,56 +78,56 @@ export const allNav = [
   {
     id: 10,
     title: "Add Painting",
-    icon: <MdDashboard />,
+    icon: <MdAddToPhotos />,
     role: "seller",
     path: "/seller/dashboard/add-painting",
   },
   {
     id: 11,
     title: "All Paintings",
-    icon: <MdDashboard />,
+    icon: <LuTally4 />,
     role: "seller",
     path: "/seller/dashboard/all-paintings",
   },
   {
     id: 12,
     title: "Discount Paintings",
-    icon: <MdDashboard />,
+    icon: <TbBasketDiscount />,
     role: "seller",
     path: "/seller/dashboard/discount-paintings",
   },
   {
     id: 13,
     title: "Orders",
-    icon: <MdDashboard />,
+    icon: <FaCartFlatbed />,
     role: "seller",
     path: "/seller/dashboard/orders",
   },
   {
     id: 14,
     title: "Payments ",
-    icon: <MdDashboard />,
+    icon: <IoIosCard />,
     role: "seller",
     path: "/seller/dashboard/payments",
   },
   {
     id: 15,
     title: "Chat-Customer",
-    icon: <MdDashboard />,
+    icon: <IoMdChatboxes />,
     role: "seller",
     path: "/seller/dashboard/chat-customer",
   },
   {
     id: 16,
     title: "Chat-Support",
-    icon: <MdDashboard />,
+    icon: <RiChatUploadFill />,
     role: "seller",
     path: "/seller/dashboard/chat-support",
   },
   {
     id: 17,
     title: "Profile",
-    icon: <MdDashboard />,
+    icon: <BsPersonVideo />,
     role: "seller",
     path: "/seller/dashboard/profile",
   },

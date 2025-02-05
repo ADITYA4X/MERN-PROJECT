@@ -5,16 +5,20 @@ import { getNav } from "../navigation/index";
 import { TbLogout2 } from "react-icons/tb";
 import { MdOutlineDateRange } from "react-icons/md";
 import { TiTime } from "react-icons/ti";
+import { useDispatch, useSelector } from "react-redux";
 
 const Sidebar = ({ showSidebar, setShowSidebar }) => {
+  const dispatch = useDispatch();
+  const { role } = useSelector((state) => state.auth);
+
   const { pathname } = useLocation();
   const [allNav, setAllNav] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    const navs = getNav("seller");
+    const navs = getNav(role);
     setAllNav(navs);
-  }, []);
+  }, [role]);
   // console.log(allNav);
 
   useEffect(() => {
