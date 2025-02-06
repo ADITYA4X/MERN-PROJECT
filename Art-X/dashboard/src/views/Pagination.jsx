@@ -49,6 +49,7 @@ const Pagination = ({
         <li
           onClick={() => setPageNumber(pageNumber - 1)}
           className="w-[33px] h-[33px] rounded-full flex justify-center items-center bg-white text-stone-500 hover:text-black cursor-pointer"
+          key={0}
         >
           <MdOutlineKeyboardDoubleArrowLeft />
         </li>
