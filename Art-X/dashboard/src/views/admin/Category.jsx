@@ -6,12 +6,21 @@ import Pagination from "../Pagination";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { TiPlus } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
+import { PropagateLoader } from "react-spinners";
+import { overrideStyle } from "../../utils/utils";
 
 const Category = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(10);
   const [show, setShow] = useState(false);
+
+  const [imageShow, setImage] = useState("");
+
+  const [state, setState] = useState({
+    name: "",
+    image: "",
+  });
 
   //   for dropdown button
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +45,25 @@ const Category = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // Dynamic image submit
+  const imageHandle = (e) => {
+    let files = e.target.files;
+    if (files.length > 0) {
+      setImage(URL.createObjectURL(files[0]));
+      setState({
+        ...state,
+        image: files[0],
+      });
+    }
+  };
+
+  const add_category = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
+
+  const loader = false;
 
   return (
     <div className="lg:px-9 px-6 lg:py-9 py-0">
@@ -209,7 +237,7 @@ const Category = () => {
                 show ? "bg-stone-800" : "bg-white"
               } " h-screen lg:h-auto px-3 py-2 lg:rounded-[35px] text-stone-700 transition-all duration-900"`}
             >
-              <div className="flex justify-between items-center mb-3 mt-4">
+              <div className="flex justify-between items-center mt-3">
                 <h1
                   className={`${
                     show ? "text-stone-200 underline" : "text-stone-800"
@@ -230,7 +258,7 @@ const Category = () => {
                 </div>
               </div>
 
-              <form>
+              <form onSubmit={add_category}>
                 <div className="flex flex-col w-full gap-1 mb-3">
                   <label
                     className={`${
@@ -241,6 +269,10 @@ const Category = () => {
                     Category Name :
                   </label>
                   <input
+                    value={state.name}
+                    onChange={(e) =>
+                      setState({ ...state, name: e.target.value })
+                    }
                     type="text"
                     placeholder="Type and enter"
                     id="name"
@@ -254,26 +286,47 @@ const Category = () => {
                     className="flex justify-center items-center flex-col w-full  h-[238px] cursor-pointer border border-dashed hover:border-stone-800 border-stone-400 rounded-[28px]"
                     htmlFor="image"
                   >
-                    <span className="text-2xl text-stone-400 hover:text-stone-700">
-                      <BiSolidImageAdd />
-                    </span>
-                    <span
-                      className={`${
-                        show ? " text-stone-100" : " text-stone-600"
-                      }`}
-                    >
-                      Select Image
-                    </span>
+                    {imageShow ? (
+                      <img
+                        alt="img"
+                        className="w-full h-full rounded-[28px]"
+                        src={imageShow}
+                      />
+                    ) : (
+                      <>
+                        <span className="text-2xl text-stone-400 hover:text-stone-700">
+                          <BiSolidImageAdd />
+                        </span>
+                        <span
+                          className={`${
+                            show ? " text-stone-100" : " text-stone-600"
+                          }`}
+                        >
+                          Select Image
+                        </span>
+                      </>
+                    )}
                   </label>
                   <input
+                    onChange={imageHandle}
                     className="hidden"
                     type="file"
                     name="image"
                     id="image"
                   />
-                  <div>
-                    <button className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2">
-                      Add Category
+                  <div className="mt-1 mb-1">
+                    <button
+                      disabled={loader ? true : false}
+                      className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2"
+                    >
+                      {loader ? (
+                        <PropagateLoader
+                          color="#aaa"
+                          cssOverride={overrideStyle}
+                        />
+                      ) : (
+                        "Add Category"
+                      )}
                     </button>
                   </div>
                 </div>
