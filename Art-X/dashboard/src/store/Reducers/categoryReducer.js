@@ -34,14 +34,14 @@ export const categoryReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder;
-    // .addCase(admin_login.pending, (state, { payload }) => {
-    //     state.loader = true;
-    // })
-    // .addCase(admin_login.rejected, (state, { payload }) => {
-    //     state.loader = false;
-    //     state.errorMessage = payload.error
-    // })
+    builder
+      .addCase(categoryAdd.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(categoryAdd.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error;
+      });
     // .addCase(admin_login.fulfilled, (state, { payload }) => {
     //     state.loader = false;
     //     state.successMessage = payload.message
