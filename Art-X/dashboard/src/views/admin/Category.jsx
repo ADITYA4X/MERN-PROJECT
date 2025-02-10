@@ -8,12 +8,18 @@ import { TiPlus } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
 import { PropagateLoader } from "react-spinners";
 import { overrideStyle } from "../../utils/utils";
-import { categoryAdd } from "../../store/Reducers/categoryReducer";
+import {
+  categoryAdd,
+  messageClear,
+} from "../../store/Reducers/categoryReducer";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { loader } = useSelector((state) => state.category);
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.category
+  );
 
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
@@ -51,7 +57,7 @@ const Category = () => {
     };
   }, []);
 
-  // Dynamic image submit
+  // Dynamic image  submit
   const imageHandle = (e) => {
     let files = e.target.files;
     if (files.length > 0) {
@@ -68,6 +74,22 @@ const Category = () => {
     dispatch(categoryAdd(state));
     console.log(state);
   };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        image: "",
+      });
+      setImage("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
 
   return (
     <div className="lg:px-9 px-6 lg:py-9 py-0">
