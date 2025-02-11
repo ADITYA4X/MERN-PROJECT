@@ -46,9 +46,43 @@ class categoryController {
     });
   };
 
+  //   end method
+
   get_category = async (req, res) => {
-    console.log("this is working");
+    console.log(req.query);
+    const { page, searchValue, perPage } = req.query;
+    const skipPage = parseInt(perPage) * (parseInt(page) - 1);
+
+    try {
+      if (searchValue) {
+        const categorys = await categoryModel
+          .find({
+            $text: { $search: searchValue },
+          })
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+        const totalCategory = await categoryModel
+          .find({
+            $text: { $search: searchValue },
+          })
+          .countDocuments();
+        responseReturn(res, 200, { categorys, totalCategory });
+      } else {
+        const categorys = await categoryModel
+          .find({})
+          .skip(skipPage)
+          .limit(perPage)
+          .sort({ createdAt: -1 });
+        const totalCategory = await categoryModel.find({}).countDocuments();
+        responseReturn(res, 200, { categorys, totalCategory });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+  //   end method
 }
 
 module.exports = new categoryController();

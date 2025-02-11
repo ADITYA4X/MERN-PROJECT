@@ -10,10 +10,12 @@ import { PropagateLoader } from "react-spinners";
 import { overrideStyle } from "../../utils/utils";
 import {
   categoryAdd,
+  get_category,
   messageClear,
 } from "../../store/Reducers/categoryReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
+import Search from "../components/Search";
 
 const Category = () => {
   const dispatch = useDispatch();
@@ -91,6 +93,15 @@ const Category = () => {
     }
   }, [successMessage, errorMessage]);
 
+  useEffect(() => {
+    const obj = {
+      perPage: parseInt(perPage),
+      page: parseInt(currentPage),
+      searchValue,
+    };
+    dispatch(get_category(obj));
+  }, [searchValue, currentPage, perPage]);
+
   return (
     <div className="lg:px-9 px-6 lg:py-9 py-0">
       <div className="flex lg:hidden justify-between items-center lg:mb-4 mb-0 py-4 bg-transparent rounded-3xl">
@@ -108,56 +119,17 @@ const Category = () => {
       <div className="flex flex-wrap w-full">
         <div className="w-full lg:w-7/12 lg:pr-3">
           <div className="w-full p-4 bg-white rounded-[35px]">
-            <div className="flex justify-between items-center">
-              <div className="relative md:block ">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="px-2 pl-12 py-2 focus:border-stone-400 outline-none border border-stone-300 rounded-3xl text-stone-600 font-normal"
-                />
-                <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-stone-400 text-md">
-                  <FaSearch />
-                </div>
-              </div>
-              {/* Dropdown Button */}
-              <div className="relative w-18 " ref={dropdownRef}>
-                <div
-                  className="w-full h-10 rounded-3xl px-4 flex items-center justify-between cursor-pointer hover:border-stone-300 outline-none bg-white border  border-stone-200 text-stone-600 drop-shadow-md duration-300 hover:bg-stone-300"
-                  onClick={toggleDropdown}
-                  onChange={(e) => setPerPage(parseInt(e.target.value))}
-                >
-                  {perPage}
-                  <span className="text-[10px] pl-3">
-                    <FaChevronDown />
-                  </span>{" "}
-                  {/* Down Arrow */}
-                </div>
+            {/* Serach start */}
 
-                {/* Dropdown Options */}
-                {isOpen && (
-                  <div className="absolute top-full mt-1 w-full bg-white border border-gray-300 rounded-3xl shadow-lg z-[1000]">
-                    {options.map((option, index) => (
-                      <div
-                        key={index}
-                        value={option}
-                        className={`text-stone-600 px-6 py-2 hover:bg-stone-200 hover:rounded-3xl cursor-pointer ${
-                          index === 0 ? "rounded-t-lg" : ""
-                        } ${
-                          index === options.length - 1 ? "rounded-b-lg" : ""
-                        }`}
-                        onClick={() => {
-                          setPerPage(option);
-                          setIsOpen(false);
-                        }}
-                      >
-                        {option}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {/* Dropdown Button */}
-            </div>
+            <Search
+              perPage={perPage}
+              setPerPage={setPerPage}
+              options={options}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
+
+            {/* Serch End */}
 
             <div className="relative overflow-x-auto">
               <table className="w-full  text-sm text-left text-stone-700 ">
