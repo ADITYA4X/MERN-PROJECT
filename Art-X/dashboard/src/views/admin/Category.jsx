@@ -19,7 +19,7 @@ import Search from "../components/Search";
 
 const Category = () => {
   const dispatch = useDispatch();
-  const { loader, successMessage, errorMessage } = useSelector(
+  const { loader, successMessage, errorMessage, categorys } = useSelector(
     (state) => state.category
   );
 
@@ -168,13 +168,13 @@ const Category = () => {
                 </thead>
 
                 <tbody>
-                  {[1, 2, 3, 4, 5].map((d, i) => (
+                  {categorys.map((d, i) => (
                     <tr key={i}>
                       <td
                         headers="orderId"
                         className="py-1 px-8 font-medium whitespace-nowrap"
                       >
-                        {d}
+                        {i + 1}
                       </td>
                       <td
                         headers="price"
@@ -182,7 +182,7 @@ const Category = () => {
                       >
                         <img
                           className="w-[45px] h-[45px]"
-                          src={`http://localhost:3001/images/category/${d}.jpg`}
+                          src={d.image}
                           alt="category"
                         />
                       </td>
@@ -190,7 +190,7 @@ const Category = () => {
                         headers="payment"
                         className="py-1 px-8 font-medium whitespace-nowrap"
                       >
-                        Paintings
+                        {d.name}
                       </td>
 
                       <td
