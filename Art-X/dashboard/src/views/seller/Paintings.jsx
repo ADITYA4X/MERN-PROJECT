@@ -3,16 +3,9 @@ import Search from "../components/Search";
 import Pagination from "../Pagination";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import {
-  TbEdit,
-  TbEye,
-  TbEyeBolt,
-  TbEyeCheck,
-  TbView360,
-  TbViewfinder,
-} from "react-icons/tb";
+import { TbEdit, TbEyeBolt } from "react-icons/tb";
 
-const AllPaintings = () => {
+const Paintings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
@@ -195,4 +188,4 @@ const AllPaintings = () => {
   );
 };
 
-export default AllPaintings;
+export default Paintings;

@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
-export const categoryAdd = createAsyncThunk(
-  "category/categoryAdd",
+export const add_painting = createAsyncThunk(
+  "painting/add_painting",
   async ({ name, image }, { rejectWithValue, fulfillWithValue }) => {
     try {
       const formData = new FormData();
@@ -11,7 +11,7 @@ export const categoryAdd = createAsyncThunk(
       const { data } = await api.post("/category-add", formData, {
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data)
       return fulfillWithValue(data);
     } catch (error) {
       // console.log(error.response.data)
@@ -19,20 +19,20 @@ export const categoryAdd = createAsyncThunk(
     }
   }
 );
-
 // End Method
-export const get_category = createAsyncThunk(
-  "category/get_category",
+
+export const get_painting = createAsyncThunk(
+  "painting/get_painting",
   async (
-    { perPage, page, searchValue },
+    { parPage, page, searchValue },
     { rejectWithValue, fulfillWithValue }
   ) => {
     try {
       const { data } = await api.get(
-        `/category-get?page=${page}&&searchValue=${searchValue}&&perPage=${perPage}`,
+        `/painting-get?page=${page}&&searchValue=${searchValue}&&parPage=${parPage}`,
         { withCredentials: true }
       );
-      // console.log(data);
+      // console.log(data)
       return fulfillWithValue(data);
     } catch (error) {
       // console.log(error.response.data)
@@ -42,14 +42,14 @@ export const get_category = createAsyncThunk(
 );
 // End Method
 
-export const categoryReducer = createSlice({
-  name: "category",
+export const paintingReducer = createSlice({
+  name: "painting",
   initialState: {
     successMessage: "",
     errorMessage: "",
     loader: false,
-    categorys: [],
-    totalCategory: 0,
+    paintings: [],
+    totalPainting: 0,
   },
   reducers: {
     messageClear: (state, _) => {
@@ -58,23 +58,23 @@ export const categoryReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(categoryAdd.pending, (state, { payload }) => {
+      .addCase(add_painting.pending, (state, { payload }) => {
         state.loader = true;
       })
-      .addCase(categoryAdd.rejected, (state, { payload }) => {
+      .addCase(add_painting.rejected, (state, { payload }) => {
         state.loader = false;
         state.errorMessage = payload.error;
       })
-      .addCase(categoryAdd.fulfilled, (state, { payload }) => {
+      .addCase(add_painting.fulfilled, (state, { payload }) => {
         state.loader = false;
         state.successMessage = payload.message;
-        state.categorys = [...state.categorys, payload.category];
+        state.paintings = [...state.paintings, payload.painting];
       })
-      .addCase(get_category.fulfilled, (state, { payload }) => {
-        state.totalCategory = payload.totalCategory;
-        state.categorys = payload.categorys;
+      .addCase(get_painting.fulfilled, (state, { payload }) => {
+        state.totalPainting = payload.totalPainting;
+        state.paintings = payload.paintings;
       });
   },
 });
-export const { messageClear } = categoryReducer.actions;
-export default categoryReducer.reducer;
+export const { messageClear } = paintingReducer.actions;
+export default paintingReducer.reducer;
