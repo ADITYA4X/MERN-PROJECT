@@ -87,7 +87,7 @@ export const allNav = [
     title: "All Paintings",
     icon: <LuTally4 />,
     role: "seller",
-    path: "/seller/dashboard/all-paintings",
+    path: "/seller/dashboard/paintings",
   },
   {
     id: 12,

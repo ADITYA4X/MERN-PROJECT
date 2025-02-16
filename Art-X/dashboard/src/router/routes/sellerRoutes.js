@@ -5,7 +5,7 @@ const SellerDashboard = lazy(() =>
 );
 const AddPainting = lazy(() => import("../../views/seller/AddPainting"));
 const EditPainting = lazy(() => import("../../views/seller/EditPainting"));
-const AllPaintings = lazy(() => import("../../views/seller/AllPaintings"));
+const AllPaintings = lazy(() => import("../../views/seller/Paintings"));
 const DiscountPaintings = lazy(() =>
   import("../../views/seller/DiscountPaintings")
 );
@@ -50,7 +50,7 @@ export const sellerRoutes = [
     status: "active",
   },
   {
-    path: "/seller/dashboard/all-paintings",
+    path: "/seller/dashboard/paintings",
     element: <AllPaintings />,
     role: "seller",
     status: "active",
