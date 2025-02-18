@@ -3,15 +3,12 @@ import api from "../../api/api";
 
 export const add_painting = createAsyncThunk(
   "painting/add_painting",
-  async ({ name, image }, { rejectWithValue, fulfillWithValue }) => {
+  async (painting, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("image", image);
-      const { data } = await api.post("/category-add", formData, {
+      const { data } = await api.post("/painting-add", painting, {
         withCredentials: true,
       });
-      // console.log(data)
+      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       // console.log(error.response.data)

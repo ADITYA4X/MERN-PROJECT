@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 app.use("/api", require("./routes/authRoutes"));
 app.use("/api", require("./routes/dashboard/categoryRoutes"));
+app.use("/api", require("./routes/dashboard/paintingRoutes"));
 
 app.get("/", (req, res) => res.send("My backend"));
 const port = process.env.PORT;

@@ -4,6 +4,7 @@ import { IoMdImages } from "react-icons/io";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/Reducers/categoryReducer";
+import { add_painting } from "../../store/Reducers/paintingReducer";
 
 const AddPainting = () => {
   // const categorys = [
@@ -63,7 +64,7 @@ const AddPainting = () => {
     description: "",
     discount: "",
     price: "",
-    brand: "",
+    type: "",
     stock: "",
   });
 
@@ -129,6 +130,19 @@ const AddPainting = () => {
 
   const add = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", state.name);
+    formData.append("description", state.description);
+    formData.append("price", state.price);
+    formData.append("stock", state.stock);
+    formData.append("discount", state.discount);
+    formData.append("type", state.type);
+    formData.append("shopName", "Art-X Gallery");
+    formData.append("category", category);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+    dispatch(add_painting(formData));
   };
 
   useEffect(() => {
@@ -171,8 +185,8 @@ const AddPainting = () => {
                   onChange={inputHandle}
                   value={state.brand}
                   type="text"
-                  name="brand"
-                  id="brand"
+                  name="type"
+                  id="type"
                   placeholder="Oil, WaterColor, Digital..."
                 />
               </div>
