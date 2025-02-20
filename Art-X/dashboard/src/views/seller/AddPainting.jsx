@@ -5,6 +5,8 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/Reducers/categoryReducer";
 import { add_painting } from "../../store/Reducers/paintingReducer";
+import { PropagateLoader } from "react-spinners";
+import { overrideStyle } from "../../utils/utils";
 
 const AddPainting = () => {
   // const categorys = [
@@ -48,6 +50,9 @@ const AddPainting = () => {
 
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
+  const { loader, successMessage, errorMessage } = useSelector(
+    (state) => state.painting
+  );
 
   useEffect(() => {
     dispatch(
@@ -139,10 +144,11 @@ const AddPainting = () => {
     formData.append("type", state.type);
     formData.append("shopName", "Art-X Gallery");
     formData.append("category", category);
+
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
-    console.log(state);
+    // console.log(state);
     dispatch(add_painting(formData));
   };
 
@@ -342,8 +348,15 @@ const AddPainting = () => {
             </div>
 
             <div className="flex">
-              <button className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2">
-                Add Product
+              <button
+                disabled={loader ? true : false}
+                className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2"
+              >
+                {loader ? (
+                  <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
+                ) : (
+                  "Add Painting"
+                )}
               </button>
             </div>
           </form>

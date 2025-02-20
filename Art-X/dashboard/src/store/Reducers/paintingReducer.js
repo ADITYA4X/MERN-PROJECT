@@ -8,7 +8,7 @@ export const add_painting = createAsyncThunk(
       const { data } = await api.post("/painting-add", painting, {
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       // console.log(error.response.data)

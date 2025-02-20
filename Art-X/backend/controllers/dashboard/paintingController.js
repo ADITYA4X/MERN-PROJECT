@@ -1,10 +1,12 @@
 const formidable = require("formidable");
 const { responseReturn } = require("../../utiles/response");
 const cloudinary = require("cloudinary").v2;
+const paintingModel = require("../../models/paintingModel");
 
 class paintingController {
   add_painting = async (req, res) => {
     // console.log("painting ok");
+    const { id } = req;
     const form = formidable({ multiples: true });
 
     form.parse(req, async (err, field, files) => {
@@ -40,9 +42,23 @@ class paintingController {
           });
           allImageUrl = [...allImageUrl, result.url];
         }
-        await paintingModel.create({});
+        await paintingModel.create({
+          sellerId: id,
+          name,
+          slug,
+          shopName,
+          category: category.trim(),
+          description: description.trim(),
+          stock: parseInt(stock),
+          price: parseInt(price),
+          discount: parseInt(discount),
+          images: allImageUrl,
+          type: type.trim(),
+        });
+
+        responseReturn(res, 201, { message: "Painting Added Successfully" });
       } catch (error) {
-        console.log(error);
+        responseReturn(res, 500, { error: error.message });
       }
     });
   };
