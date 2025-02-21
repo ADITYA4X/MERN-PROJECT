@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "../components/Search";
 import Pagination from "../Pagination";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { TbEdit, TbEyeBolt } from "react-icons/tb";
+import { useDispatch, useSelector } from "react-redux";
+import { get_paintings } from "../../store/Reducers/paintingReducer";
 
 const Paintings = () => {
+  const dispatch = useDispatch();
+  const { paintings, totalPainting } = useSelector((state) => state.painting);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
 
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(5);
   const options = [5, 10, 20];
+
+  useEffect(() => {
+    const obj = {
+      perPage: parseInt(perPage),
+      page: parseInt(currentPage),
+      searchValue,
+    };
+    dispatch(get_paintings(obj));
+  }, [searchValue, currentPage, perPage]);
 
   return (
     <div className="lg:px-4 px-2 lg:p-9 py-2  ">
@@ -108,7 +122,7 @@ const Paintings = () => {
                   >
                     <img
                       className="w-[45px] h-[45px]"
-                      src={`http://localhost:3001/images/category/${d}.jpg`}
+                      src={`http://localhost:3002/images/category/${d}.jpg`}
                       alt="category"
                     />
                   </td>

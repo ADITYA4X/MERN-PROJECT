@@ -4,4 +4,5 @@ export const overrideStyle = {
   height: "24px",
   justifyContent: "center",
   alignItems: "center",
+  w: "300px",
 };

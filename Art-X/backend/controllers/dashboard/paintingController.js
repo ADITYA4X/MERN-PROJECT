@@ -64,6 +64,48 @@ class paintingController {
   };
 
   // End Method
+
+  paintings_get = async (req, res) => {
+    // console.log(req.query);
+    // console.log(req.id);
+
+    const { page, searchValue, perPage } = req.query;
+    const { id } = req;
+
+    const skipPage = parseInt(perPage) * (parseInt(page) - 1);
+
+    try {
+      if (searchValue) {
+        const paintings = await paintingModel
+          .find({
+            $text: { $search: searchValue },
+            sellerId: id,
+          })
+          .skip(skipPage)
+          .limit(parPage)
+          .sort({ createdAt: -1 });
+        const totalProduct = await paintingModel
+          .find({
+            $text: { $search: searchValue },
+            sellerId: id,
+          })
+          .countDocuments();
+        responseReturn(res, 200, { paintings, totalPainting });
+      } else {
+        const paintings = await paintingModel
+          .find({ sellerId: id })
+          .skip(skipPage)
+          .limit(parPage)
+          .sort({ createdAt: -1 });
+        const totalPainting = await productModel
+          .find({ sellerId: id })
+          .countDocuments();
+        responseReturn(res, 200, { paintings, totalPainting });
+      }
+    } catch (error) {}
+  };
+
+  // End Method
 }
 
 module.exports = new paintingController();

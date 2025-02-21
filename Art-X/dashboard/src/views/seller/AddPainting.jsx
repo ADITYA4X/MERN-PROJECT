@@ -4,50 +4,15 @@ import { IoMdImages } from "react-icons/io";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/Reducers/categoryReducer";
-import { add_painting } from "../../store/Reducers/paintingReducer";
+import {
+  add_painting,
+  messageClear,
+} from "../../store/Reducers/paintingReducer";
 import { PropagateLoader } from "react-spinners";
 import { overrideStyle } from "../../utils/utils";
+import toast from "react-hot-toast";
 
 const AddPainting = () => {
-  // const categorys = [
-  //   {
-  //     id: 1,
-  //     name: "Madhubani",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Pattachitra",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Kalamkari",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Miniature",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Mandala",
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Lepakshi",
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Thangka",
-  //   },
-  //   {
-  //     id: 8,
-  //     name: "Modern",
-  //   },
-  //   {
-  //     id: 9,
-  //     name: "Minimalist",
-  //   },
-  // ];
-
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
   const { loader, successMessage, errorMessage } = useSelector(
@@ -114,6 +79,29 @@ const AddPainting = () => {
   };
   // console.log(images)
   // console.log(imageShow)
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        description: "",
+        discount: "",
+        price: "",
+        brand: "",
+        stock: "",
+      });
+      setImageShow([]);
+      setImages([]);
+      setCategory("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
+
   const changeImage = (img, index) => {
     if (img) {
       let tempUrl = imageShow;
@@ -350,7 +338,7 @@ const AddPainting = () => {
             <div className="flex">
               <button
                 disabled={loader ? true : false}
-                className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2"
+                className="bg-stone-600 hover:bg-black  text-white rounded-3xl px-7 py-2 my-2"
               >
                 {loader ? (
                   <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
