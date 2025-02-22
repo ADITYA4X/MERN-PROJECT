@@ -82,9 +82,9 @@ class paintingController {
             sellerId: id,
           })
           .skip(skipPage)
-          .limit(parPage)
+          .limit(perPage)
           .sort({ createdAt: -1 });
-        const totalProduct = await paintingModel
+        const totalPainting = await paintingModel
           .find({
             $text: { $search: searchValue },
             sellerId: id,
@@ -95,9 +95,9 @@ class paintingController {
         const paintings = await paintingModel
           .find({ sellerId: id })
           .skip(skipPage)
-          .limit(parPage)
+          .limit(perPage)
           .sort({ createdAt: -1 });
-        const totalPainting = await productModel
+        const totalPainting = await paintingModel
           .find({ sellerId: id })
           .countDocuments();
         responseReturn(res, 200, { paintings, totalPainting });

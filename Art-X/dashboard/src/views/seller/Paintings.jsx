@@ -108,13 +108,13 @@ const Paintings = () => {
             </thead>
 
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {paintings.map((d, i) => (
                 <tr key={i}>
                   <td
                     headers="orderId"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    {d}
+                    {i + 1}
                   </td>
                   <td
                     headers="price"
@@ -122,7 +122,7 @@ const Paintings = () => {
                   >
                     <img
                       className="w-[45px] h-[45px]"
-                      src={`http://localhost:3002/images/category/${d}.jpg`}
+                      src={d.images[0]}
                       alt="category"
                     />
                   </td>
@@ -130,37 +130,41 @@ const Paintings = () => {
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Shri Krishna
+                    {d?.name?.slice(0, 15)}...
                   </td>
                   <td
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Oil Painting
+                    {d.type}
                   </td>
                   <td
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    Madhubani
+                    {d.category}
                   </td>
                   <td
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    2000 &#8377;
+                    {d.price} &#8377;
                   </td>
                   <td
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    20%
+                    {d.discount === 0 ? (
+                      <span>No Discount</span>
+                    ) : (
+                      <span>{d.discount} %</span>
+                    )}
                   </td>
                   <td
                     headers="payment"
                     className="py-1 px-8 font-medium whitespace-nowrap"
                   >
-                    06
+                    {d.stock}
                   </td>
 
                   <td
@@ -188,15 +192,19 @@ const Paintings = () => {
           </table>
         </div>
 
-        <div className="w-full flex justify-center mt-6 bottom-6 right-6 ">
-          <Pagination
-            pageNumber={currentPage}
-            setPageNumber={setCurrentPage}
-            totalItem={50}
-            perPage={perPage}
-            showItem={3}
-          />
-        </div>
+        {totalPainting <= perPage ? (
+          ""
+        ) : (
+          <div className="w-full flex justify-end mt-4 bottom-4 right-4">
+            <Pagination
+              pageNumber={currentPage}
+              setPageNumber={setCurrentPage}
+              totalItem={50}
+              parPage={perPage}
+              showItem={3}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

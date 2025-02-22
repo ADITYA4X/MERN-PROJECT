@@ -65,7 +65,6 @@ export const paintingReducer = createSlice({
       .addCase(add_painting.fulfilled, (state, { payload }) => {
         state.loader = false;
         state.successMessage = payload.message;
-        state.paintings = [...state.paintings, payload.painting];
       })
       .addCase(get_paintings.fulfilled, (state, { payload }) => {
         state.totalPainting = payload.totalPainting;
