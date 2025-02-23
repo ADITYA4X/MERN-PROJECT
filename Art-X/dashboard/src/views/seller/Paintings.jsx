@@ -173,7 +173,7 @@ const Paintings = () => {
                   >
                     <div className="flex justify-start items-center gap-3">
                       <Link
-                        to={`/seller/dashboard/edit-painting/24`}
+                        to={`/seller/dashboard/edit-painting/${d._id}`}
                         className="p-[6px] bg-stone-300 rounded hover:shadow-lg hover:shadow-stone-500/20"
                       >
                         <TbEdit />

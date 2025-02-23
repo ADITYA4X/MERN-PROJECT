@@ -1,47 +1,69 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { IoMdImages } from "react-icons/io";
-import { IoMdCloseCircle } from "react-icons/io";
+import { Link, useParams } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { get_category } from "../../store/Reducers/categoryReducer";
+import { get_painting } from "../../store/Reducers/paintingReducer";
 
 const EditPainting = () => {
-  const categorys = [
-    {
-      id: 1,
-      name: "Madhubani",
-    },
-    {
-      id: 2,
-      name: "Pattachitra",
-    },
-    {
-      id: 3,
-      name: "Kalamkari",
-    },
-    {
-      id: 4,
-      name: "Miniature",
-    },
-    {
-      id: 5,
-      name: "Mandala",
-    },
-    {
-      id: 6,
-      name: "Lepakshi",
-    },
-    {
-      id: 7,
-      name: "Thangka",
-    },
-    {
-      id: 8,
-      name: "Modern",
-    },
-    {
-      id: 9,
-      name: "Minimalist",
-    },
-  ];
+  const { paintingId } = useParams();
+  // console.log(paintingId);
+  const dispatch = useDispatch();
+  const { categorys } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(
+      get_category({
+        searchValue: "",
+        perPage: "",
+        page: "",
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    dispatch(get_painting(paintingId));
+  }, [paintingId]);
+
+  // const categorys = [
+  //   {
+  //     id: 1,
+  //     name: "Madhubani",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Pattachitra",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Kalamkari",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Miniature",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Mandala",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Lepakshi",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Thangka",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "Modern",
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "Minimalist",
+  //   },
+  // ];
+
   const [state, setState] = useState({
     name: "",
     description: "",
@@ -97,7 +119,7 @@ const EditPainting = () => {
       stock: 10,
     });
     setCategory("Madhubani");
-    setImageShow(["http://localhost:3001/images/category/1.jpg", ,]);
+    setImageShow(["http://localhost:3002/images/category/1.jpg"]);
   }, []);
 
   return (
