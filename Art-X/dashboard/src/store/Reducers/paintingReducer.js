@@ -40,16 +40,12 @@ export const get_paintings = createAsyncThunk(
 // End Method
 
 export const get_painting = createAsyncThunk(
-  "painting/get_paintings",
-  async (
-    { perPage, page, searchValue },
-    { rejectWithValue, fulfillWithValue }
-  ) => {
+  "painting/get_painting",
+  async (paintingId, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(
-        `/paintings-get?page=${page}&&searchValue=${searchValue}&&perPage=${perPage}`,
-        { withCredentials: true }
-      );
+      const { data } = await api.get(`/painting-get/${paintingId}`, {
+        withCredentials: true,
+      });
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
@@ -67,6 +63,7 @@ export const paintingReducer = createSlice({
     errorMessage: "",
     loader: false,
     paintings: [],
+    painting: "",
     totalPainting: 0,
   },
   reducers: {
@@ -90,6 +87,9 @@ export const paintingReducer = createSlice({
       .addCase(get_paintings.fulfilled, (state, { payload }) => {
         state.totalPainting = payload.totalPainting;
         state.paintings = payload.paintings;
+      })
+      .addCase(get_painting.fulfilled, (state, { payload }) => {
+        state.painting = payload.painting;
       });
   },
 });

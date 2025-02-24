@@ -102,9 +102,22 @@ class paintingController {
           .countDocuments();
         responseReturn(res, 200, { paintings, totalPainting });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
+  // End Method
+
+  painting_get = async (req, res) => {
+    const { paintingId } = req.params;
+    try {
+      const painting = await paintingModel.findById(paintingId);
+      responseReturn(res, 200, { painting });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   // End Method
 }
 

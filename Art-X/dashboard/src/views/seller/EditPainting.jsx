@@ -10,6 +10,7 @@ const EditPainting = () => {
   // console.log(paintingId);
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
+  const { painting } = useSelector((state) => state.painting);
 
   useEffect(() => {
     dispatch(
@@ -111,16 +112,17 @@ const EditPainting = () => {
 
   useEffect(() => {
     setState({
-      name: "Bharni-Shri Krishna",
-      description: "Mythological depictions of Hindu gods Krishna.",
-      discount: 20,
-      price: 4000,
-      Type: "Oil Painting",
-      stock: 10,
+      name: painting.name,
+      description: painting.description,
+      discount: painting.discount,
+      price: painting.price,
+      Type: painting.type,
+      stock: painting.stock,
     });
-    setCategory("Madhubani");
-    setImageShow(["http://localhost:3002/images/category/1.jpg"]);
-  }, []);
+    setCategory(painting.category);
+    // setImages(painting.images);
+    setImageShow(painting.images);
+  }, [painting]);
 
   return (
     <div className="px-2 lg:px-7 pt-5">
