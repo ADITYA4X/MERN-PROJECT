@@ -3,14 +3,23 @@ import { Link, useParams } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { get_category } from "../../store/Reducers/categoryReducer";
-import { get_painting } from "../../store/Reducers/paintingReducer";
+import {
+  get_painting,
+  messageClear,
+  update_painting,
+} from "../../store/Reducers/paintingReducer";
+import { overrideStyle } from "../../utils/utils";
+import { PropagateLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const EditPainting = () => {
   const { paintingId } = useParams();
   // console.log(paintingId);
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
-  const { painting } = useSelector((state) => state.painting);
+  const { painting, loader, successMessage, errorMessage } = useSelector(
+    (state) => state.painting
+  );
 
   useEffect(() => {
     dispatch(
@@ -25,45 +34,6 @@ const EditPainting = () => {
   useEffect(() => {
     dispatch(get_painting(paintingId));
   }, [paintingId]);
-
-  // const categorys = [
-  //   {
-  //     id: 1,
-  //     name: "Madhubani",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Pattachitra",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Kalamkari",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Miniature",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Mandala",
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Lepakshi",
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "Thangka",
-  //   },
-  //   {
-  //     id: 8,
-  //     name: "Modern",
-  //   },
-  //   {
-  //     id: 9,
-  //     name: "Minimalist",
-  //   },
-  // ];
 
   const [state, setState] = useState({
     name: "",
@@ -120,9 +90,43 @@ const EditPainting = () => {
       stock: painting.stock,
     });
     setCategory(painting.category);
-    // setImages(painting.images);
     setImageShow(painting.images);
   }, [painting]);
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setState({
+        name: "",
+        description: "",
+        discount: "",
+        price: "",
+        brand: "",
+        stock: "",
+      });
+
+      setCategory("");
+    }
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage, errorMessage]);
+
+  const update = (e) => {
+    e.preventDefault();
+    const obj = {
+      name: state.name,
+      description: state.description,
+      discount: state.discount,
+      price: state.price,
+      type: state.type,
+      stock: state.stock,
+      paintingId: paintingId,
+    };
+    dispatch(update_painting(obj));
+  };
 
   return (
     <div className="px-2 lg:px-7 pt-5">
@@ -139,7 +143,7 @@ const EditPainting = () => {
           </Link>
         </div>
         <div>
-          <form>
+          <form onSubmit={update}>
             <div className="flex flex-col mb-3 md:flex-row gap-4 w-full text-stone-800">
               <div className="flex flex-col w-full gap-1">
                 <label htmlFor="name">Painting Name</label>
@@ -289,8 +293,15 @@ const EditPainting = () => {
             </div>
 
             <div className="flex">
-              <button className="bg-stone-600 hover:shadow-stone-600/30 hover:shadow-lg text-white rounded-3xl px-7 py-2 my-2">
-                Save Changes
+              <button
+                disabled={loader ? true : false}
+                className="bg-stone-600 hover:bg-black  text-white rounded-3xl px-7 py-2 my-2"
+              >
+                {loader ? (
+                  <PropagateLoader color="#aaa" cssOverride={overrideStyle} />
+                ) : (
+                  "Save Changes"
+                )}
               </button>
             </div>
           </form>

@@ -56,6 +56,24 @@ export const get_painting = createAsyncThunk(
 );
 // End Method
 
+export const update_painting = createAsyncThunk(
+  "painting/update_painting",
+  async (painting, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/painting-update`, painting, {
+        withCredentials: true,
+      });
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      // console.log(error.response.data)
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// End Method
+
 export const paintingReducer = createSlice({
   name: "painting",
   initialState: {
