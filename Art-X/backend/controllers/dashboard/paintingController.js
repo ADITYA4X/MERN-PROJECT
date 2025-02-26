@@ -119,6 +119,35 @@ class paintingController {
     }
   };
   // End Method
+
+  painting_update = async (req, res) => {
+    let { name, description, stock, price, discount, type, paintingId } =
+      req.body;
+    name = name.trim();
+    const slug = name.split(" ").join("-");
+
+    try {
+      await paintingModel.findByIdAndUpdate(paintingId, {
+        name,
+        description,
+        stock,
+        price,
+        discount,
+        type,
+        paintingId,
+        slug,
+      });
+      const painting = await paintingModel.findById(paintingId);
+      responseReturn(res, 200, {
+        painting,
+        message: "Painting Updated Successfully",
+      });
+    } catch (error) {
+      responseReturn(res, 500, { error: error.message });
+    }
+  };
+
+  // End Method
 }
 
 module.exports = new paintingController();

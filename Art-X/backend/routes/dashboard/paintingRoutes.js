@@ -9,5 +9,10 @@ router.get(
   authMiddleware,
   paintingController.painting_get
 );
+router.post(
+  "/painting-update",
+  authMiddleware,
+  paintingController.painting_update
+);
 
 module.exports = router;

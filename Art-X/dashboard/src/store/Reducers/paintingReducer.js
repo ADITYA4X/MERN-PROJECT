@@ -60,7 +60,7 @@ export const update_painting = createAsyncThunk(
   "painting/update_painting",
   async (painting, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.get(`/painting-update`, painting, {
+      const { data } = await api.post(`/painting-update`, painting, {
         withCredentials: true,
       });
       console.log(data);
@@ -108,6 +108,18 @@ export const paintingReducer = createSlice({
       })
       .addCase(get_painting.fulfilled, (state, { payload }) => {
         state.painting = payload.painting;
+      })
+      .addCase(update_painting.pending, (state, { payload }) => {
+        state.loader = true;
+      })
+      .addCase(update_painting.rejected, (state, { payload }) => {
+        state.loader = false;
+        state.errorMessage = payload.error;
+      })
+      .addCase(update_painting.fulfilled, (state, { payload }) => {
+        state.loader = false;
+        state.painting = payload.painting;
+        state.successMessage = payload.message;
       });
   },
 });

@@ -40,7 +40,7 @@ const EditPainting = () => {
     description: "",
     discount: "",
     price: "",
-    Type: "",
+    type: "",
     stock: "",
   });
 
@@ -53,7 +53,7 @@ const EditPainting = () => {
 
   const [cateShow, setCateShow] = useState(false);
   const [category, setCategory] = useState("");
-  const [allCategory, setAllCategory] = useState(categorys);
+  const [allCategory, setAllCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const categorySearch = (e) => {
@@ -86,7 +86,7 @@ const EditPainting = () => {
       description: painting.description,
       discount: painting.discount,
       price: painting.price,
-      Type: painting.type,
+      type: painting.type,
       stock: painting.stock,
     });
     setCategory(painting.category);
@@ -94,19 +94,15 @@ const EditPainting = () => {
   }, [painting]);
 
   useEffect(() => {
+    if (categorys.length > 0) {
+      setAllCategory(categorys);
+    }
+  });
+
+  useEffect(() => {
     if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
-      setState({
-        name: "",
-        description: "",
-        discount: "",
-        price: "",
-        brand: "",
-        stock: "",
-      });
-
-      setCategory("");
     }
     if (errorMessage) {
       toast.error(errorMessage);
@@ -154,7 +150,7 @@ const EditPainting = () => {
                   type="text"
                   name="name"
                   id="name"
-                  placeholder="Product Name"
+                  placeholder="Painting Name"
                 />
               </div>
               <div className="flex flex-col w-full gap-1 text-stone-800">
@@ -200,21 +196,22 @@ const EditPainting = () => {
                   </div>
                   <div className="pt-14"></div>
                   <div className="flex justify-start items-start flex-col h-[200px] overflow-y-scroll">
-                    {allCategory.map((c, i) => (
-                      <span
-                        className={`px-4 py-2 focus:border-stone-900 hover:text-white hover:shadow-lg w-full cursor-pointer ${
-                          category === c.name && "bg-stone-500"
-                        }`}
-                        onClick={() => {
-                          setCateShow(false);
-                          setCategory(c.name);
-                          setSearchValue("");
-                          setAllCategory(categorys);
-                        }}
-                      >
-                        {c.name}{" "}
-                      </span>
-                    ))}
+                    {allCategory.length > 0 &&
+                      allCategory.map((c, i) => (
+                        <span
+                          className={`px-4 py-2 focus:border-stone-900 hover:text-white hover:shadow-lg w-full cursor-pointer ${
+                            category === c.name && "bg-stone-500"
+                          }`}
+                          onClick={() => {
+                            setCateShow(false);
+                            setCategory(c.name);
+                            setSearchValue("");
+                            setAllCategory(categorys);
+                          }}
+                        >
+                          {c.name}{" "}
+                        </span>
+                      ))}
                   </div>
                 </div>
               </div>
