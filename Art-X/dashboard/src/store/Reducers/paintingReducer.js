@@ -46,7 +46,7 @@ export const get_painting = createAsyncThunk(
       const { data } = await api.get(`/painting-get/${paintingId}`, {
         withCredentials: true,
       });
-      console.log(data);
+      // console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       // console.log(error.response.data)
@@ -60,7 +60,33 @@ export const update_painting = createAsyncThunk(
   "painting/update_painting",
   async (painting, { rejectWithValue, fulfillWithValue }) => {
     try {
-      const { data } = await api.post(`/painting-update`, painting, {
+      const { data } = await api.post("/painting-update", painting, {
+        withCredentials: true,
+      });
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      // console.log(error.response.data)
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// End Method
+
+export const painting_image_update = createAsyncThunk(
+  "painting/painting-image-update",
+  async (
+    { oldImage, newImage, paintingId },
+    { rejectWithValue, fulfillWithValue }
+  ) => {
+    try {
+      const formData = new FormData();
+      formData.append("oldImage", oldImage);
+      formData.append("newImage", newImage);
+      formData.append("paintingId", paintingId);
+      // console.log("Sending request with data:", formData);
+      const { data } = await api.post("/painting-image-update", formData, {
         withCredentials: true,
       });
       console.log(data);
@@ -118,6 +144,10 @@ export const paintingReducer = createSlice({
       })
       .addCase(update_painting.fulfilled, (state, { payload }) => {
         state.loader = false;
+        state.painting = payload.painting;
+        state.successMessage = payload.message;
+      })
+      .addCase(painting_image_update.fulfilled, (state, { payload }) => {
         state.painting = payload.painting;
         state.successMessage = payload.message;
       });

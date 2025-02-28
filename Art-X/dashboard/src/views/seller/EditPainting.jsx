@@ -7,6 +7,7 @@ import {
   get_painting,
   messageClear,
   update_painting,
+  painting_image_update,
 } from "../../store/Reducers/paintingReducer";
 import { overrideStyle } from "../../utils/utils";
 import { PropagateLoader } from "react-spinners";
@@ -32,7 +33,9 @@ const EditPainting = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(get_painting(paintingId));
+    if (paintingId) {
+      dispatch(get_painting(paintingId));
+    }
   }, [paintingId]);
 
   const [state, setState] = useState({
@@ -69,35 +72,42 @@ const EditPainting = () => {
     }
   };
 
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
   const [imageShow, setImageShow] = useState([]);
 
   const changeImage = (img, files) => {
     if (files.length > 0) {
       console.log(img);
       console.log(files[0]);
+      dispatch(
+        painting_image_update({
+          oldImage: img,
+          newImage: files[0],
+          paintingId,
+        })
+      );
     }
   };
-  console.log(images);
+  // console.log(images);
 
   useEffect(() => {
     setState({
-      name: painting.name,
-      description: painting.description,
-      discount: painting.discount,
-      price: painting.price,
-      type: painting.type,
-      stock: painting.stock,
+      name: painting?.name || "",
+      description: painting?.description || "",
+      discount: painting?.discount || "",
+      price: painting?.price || "",
+      type: painting?.type || "",
+      stock: painting?.stock || "",
     });
-    setCategory(painting.category);
-    setImageShow(painting.images);
+    setCategory(painting?.category || "");
+    setImageShow(painting?.images || []);
   }, [painting]);
 
   useEffect(() => {
     if (categorys.length > 0) {
       setAllCategory(categorys);
     }
-  });
+  }, [categorys]);
 
   useEffect(() => {
     if (successMessage) {
@@ -144,6 +154,7 @@ const EditPainting = () => {
               <div className="flex flex-col w-full gap-1">
                 <label htmlFor="name">Painting Name</label>
                 <input
+                  title="Painting Name"
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
                   value={state.name}
@@ -156,9 +167,10 @@ const EditPainting = () => {
               <div className="flex flex-col w-full gap-1 text-stone-800">
                 <label htmlFor="Type">Painting Type</label>
                 <input
+                  title="Painting Type"
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
-                  value={state.Type}
+                  value={state.type}
                   type="text"
                   name="Type"
                   id="Type"
@@ -175,9 +187,10 @@ const EditPainting = () => {
                   onClick={() => setCateShow(!cateShow)}
                   className="px-4 py-2 focus:border-stone-900 outline-none bg-stone-300 border border-stone-300 rounded-xl text-stone-800"
                   onChange={inputHandle}
-                  value={category}
+                  value={category || ""}
                   type="text"
                   id="category"
+                  title="Painting Category"
                   placeholder="--select category--"
                 />
                 <div
@@ -191,6 +204,7 @@ const EditPainting = () => {
                       onChange={categorySearch}
                       className="px-3 py-1 w-full focus:border-stone-900  outline-none bg-transparent border border-stone-700 rounded-xl text-stone-800 overflow-hidden"
                       type="text"
+                      title="Search Category"
                       placeholder="search"
                     />
                   </div>
@@ -199,6 +213,7 @@ const EditPainting = () => {
                     {allCategory.length > 0 &&
                       allCategory.map((c, i) => (
                         <span
+                          key={i}
                           className={`px-4 py-2 focus:border-stone-900 hover:text-white hover:shadow-lg w-full cursor-pointer ${
                             category === c.name && "bg-stone-500"
                           }`}
@@ -224,6 +239,7 @@ const EditPainting = () => {
                   value={state.stock}
                   type="text"
                   name="stock"
+                  title="Painting Stock"
                   id="stock"
                   placeholder="Stock"
                 />
@@ -239,6 +255,7 @@ const EditPainting = () => {
                   value={state.price}
                   type="number"
                   name="price"
+                  title="Price"
                   id="price"
                   placeholder="price"
                 />
@@ -251,6 +268,7 @@ const EditPainting = () => {
                   value={state.discount}
                   type="number"
                   name="discount"
+                  title="discount"
                   id="discount"
                   placeholder="discount by %"
                 />
@@ -266,6 +284,7 @@ const EditPainting = () => {
                 onChange={inputHandle}
                 value={state.description}
                 name="description"
+                title="Description"
                 id="description"
                 placeholder="Description"
                 cols="10"
@@ -274,19 +293,22 @@ const EditPainting = () => {
             </div>
 
             <div className="grid lg:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 sm:gap-4 md:gap-4 gap-3 w-full text-stone-600 mb-4 ">
-              {imageShow.map((img, i) => (
-                <div>
-                  <label htmlFor={i}>
-                    <img src={img} alt="" />
-                  </label>
-                  <input
-                    onChange={(e) => changeImage(img, e.target.files)}
-                    type="file"
-                    id={i}
-                    className="hidden"
-                  />
-                </div>
-              ))}
+              {imageShow &&
+                imageShow.length > 0 &&
+                imageShow.map((img, i) => (
+                  <div key={i}>
+                    <label htmlFor={i}>
+                      <img src={img} alt="" />
+                    </label>
+                    <input
+                      onChange={(e) => changeImage(img, e.target.files)}
+                      type="file"
+                      title="Change Image"
+                      id={i}
+                      className="hidden"
+                    />
+                  </div>
+                ))}
             </div>
 
             <div className="flex">

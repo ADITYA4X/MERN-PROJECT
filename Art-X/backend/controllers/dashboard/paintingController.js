@@ -148,6 +148,59 @@ class paintingController {
   };
 
   // End Method
+
+  painting_image_update = async (req, res) => {
+    // console.log("Received request for painting image update");
+    // console.log(req.headers);
+    // console.log(req.url);
+    const form = formidable({ multiples: true });
+    // console.log(form);
+
+    form.parse(req, async (err, field, files) => {
+      // console.log(field);
+      // console.log(files);
+      const { oldImage, paintingId } = field;
+      const { newImage } = files;
+
+      if (err) {
+        responseReturn(res, 400, { error: err.message });
+      } else {
+        try {
+          cloudinary.config({
+            cloud_name: process.env.cloud_name,
+            api_key: process.env.api_key,
+            api_secret: process.env.api_secret,
+            secure: true,
+          });
+
+          const result = await cloudinary.uploader.upload(newImage.filepath, {
+            folder: "paintings",
+          });
+
+          // console.log(result);
+
+          if (result) {
+            let { images } = await paintingModel.findById(paintingId);
+            // console.log(images);
+            const index = images.findIndex((img) => img === oldImage);
+            images[index] = result.url;
+            await paintingModel.findByIdAndUpdate(paintingId, { images });
+
+            const painting = await paintingModel.findById(paintingId);
+            responseReturn(res, 200, {
+              painting,
+              message: "Painting Image Updated Successfully",
+            });
+          } else {
+            responseReturn(res, 404, { error: "Image Upload Failed" });
+          }
+        } catch (error) {
+          responseReturn(res, 404, { error: error.message });
+        }
+      }
+    });
+  };
+  // End Method
 }
 
 module.exports = new paintingController();

@@ -59,7 +59,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
           <Link to="/" className="w-[200px] h-[90px] ml-[-92px]">
             <img
               className="w-full"
-              src="http://localhost:3001/images/logo3.png"
+              src="http://localhost:3002/images/logo3.png"
               alt=""
             />
           </Link>

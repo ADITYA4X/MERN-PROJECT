@@ -50,7 +50,7 @@ const Header = ({ showSidebar, setShowSidebar }) => {
                 </div>
                 <img
                   className="w-[42px] h-[42px] rounded-full overflow-hidden"
-                  src="http://localhost:3001/images/admin.jpg"
+                  src="http://localhost:3002/images/admin.jpg"
                   alt=""
                 />
               </div>

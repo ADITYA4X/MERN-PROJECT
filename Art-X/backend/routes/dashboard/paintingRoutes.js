@@ -14,5 +14,10 @@ router.post(
   authMiddleware,
   paintingController.painting_update
 );
+router.post(
+  "/painting-image-update",
+  authMiddleware,
+  paintingController.painting_image_update
+);
 
 module.exports = router;

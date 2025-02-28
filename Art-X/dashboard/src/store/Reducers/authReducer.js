@@ -76,7 +76,7 @@ const returnRole = (token) => {
   if (token) {
     // console.log(token);
     const decodeToken = jwtDecode(token);
-    console.log(decodeToken);
+    // console.log(decodeToken);
     const expireTime = new Date(decodeToken.exp * 1000);
     if (new Date() > expireTime) {
       localStorage.removeItem("accessToken");
