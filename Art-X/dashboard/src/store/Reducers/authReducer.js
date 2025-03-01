@@ -72,6 +72,25 @@ export const seller_register = createAsyncThunk(
   }
 );
 
+// end method
+
+export const profile_image_upload = createAsyncThunk(
+  "auth/profile_image_upload",
+  async (image, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/profile-image-upload", image, {
+        withCredentials: true,
+      });
+      // console.log(data)
+      return fulfillWithValue(data);
+    } catch (error) {
+      // console.log(error.response.data)
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+// end method
+
 const returnRole = (token) => {
   if (token) {
     // console.log(token);

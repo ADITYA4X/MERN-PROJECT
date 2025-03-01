@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 const AddPainting = () => {
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.category);
+
   const { loader, successMessage, errorMessage } = useSelector(
     (state) => state.painting
   );
