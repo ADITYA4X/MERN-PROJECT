@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaImages } from "react-icons/fa6";
 import { MdEditSquare } from "react-icons/md";
 import { FadeLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
-import { profile_image_upload } from "../../store/Reducers/authReducer";
+import {
+  messageClear,
+  profile_image_upload,
+} from "../../store/Reducers/authReducer";
+import toast from "react-hot-toast";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo, loader, successMessage } = useSelector(
+    (state) => state.auth
+  );
 
-  const image = true;
-  const loader = true;
+  // const image = true;
+  // const loader = true;
   const status = "active";
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      messageClear();
+    }
+  }, [successMessage]);
 
   const add_image = (e) => {
     if (e.target.files.length > 0) {
@@ -29,18 +42,18 @@ const Profile = () => {
         <div className="w-full md:w-6/12">
           <div className="w-full p-2 bg-stone-400 rounded-3xl text-black">
             <div className="flex justify-center items-center py-3">
-              {image?.image ? (
+              {userInfo?.image ? (
                 <label
                   htmlFor="img"
                   className="h-[165px] w-[180px] relative p-3 cursor-pointer  overflow-hidden"
                 >
                   <img
-                    src="http://localhost:3002/images/demo.jpg"
+                    src={userInfo.image}
                     alt=""
                     className="h-[150px] w-[180px] rounded-3xl"
                   />
 
-                  {!loader && (
+                  {loader && (
                     <div className="bg-slate-600 absolute left-0 top-0 w-full h-full opacity-70 flex justify-center items-center z-20 rounded-3xl">
                       <span>
                         <FadeLoader />

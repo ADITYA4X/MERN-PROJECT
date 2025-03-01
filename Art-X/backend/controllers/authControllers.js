@@ -124,6 +124,7 @@ class authControllers {
   //End getUser Method
 
   profile_image_upload = async (req, res) => {
+    console.log(req);
     const { id } = req;
     const form = formidable({ multiples: true });
     form.parse(req, async (err, _, files) => {
@@ -133,12 +134,28 @@ class authControllers {
         api_secret: process.env.api_secret,
         secure: true,
       });
+
       const { image } = files;
 
       try {
+        const result = await cloudinary.uploader.upload(image.filepath, {
+          folder: "profile",
+        });
+
+        if (result) {
+          await sellerModel.findByIdAndUpdate(id, {
+            image: result.url,
+          });
+          const userInfo = await sellerModel.findById(id);
+          responseReturn(res, 201, {
+            message: "Profile Image Upload Successfully",
+            userInfo,
+          });
+        } else {
+          responseReturn(res, 404, { error: "Image Upload Failed" });
+        }
       } catch (error) {
-        console.log(error.message);
-        responseReturn(res, 500, { error: "Internal Server Error" });
+        responseReturn(res, 500, { error: error.message });
       }
     });
   };
