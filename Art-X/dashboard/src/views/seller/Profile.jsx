@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaImages } from "react-icons/fa6";
 import { MdEditSquare } from "react-icons/md";
 import { FadeLoader } from "react-spinners";
@@ -6,10 +6,23 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   messageClear,
   profile_image_upload,
+  profile_info_add,
 } from "../../store/Reducers/authReducer";
+import { PropagateLoader } from "react-spinners";
+import { overrideStyle } from "../../utils/utils";
+
 import toast from "react-hot-toast";
 
 const Profile = () => {
+  const [state, setState] = useState({
+    state: "",
+    district: "",
+    shopName: "",
+    city: "",
+    pincode: "",
+    mobNum: "",
+  });
+
   const dispatch = useDispatch();
   const { userInfo, loader, successMessage } = useSelector(
     (state) => state.auth
@@ -34,6 +47,18 @@ const Profile = () => {
 
       dispatch(profile_image_upload(formData));
     }
+  };
+
+  const inputHandle = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const add = (e) => {
+    e.preventDefault();
+    dispatch(profile_info_add(state));
   };
 
   return (
@@ -128,7 +153,7 @@ const Profile = () => {
 
             <div className="px-0 md:px-5 pb-2 ">
               {!userInfo?.shopInfo ? (
-                <form className="pt-6">
+                <form onSubmit={add} className="pt-6">
                   <div className="flex flex-col w-full gap-1 mb-2 ">
                     <label
                       htmlFor="Art-Gallery-Name"
@@ -137,28 +162,31 @@ const Profile = () => {
                       Art Gallery Name :
                     </label>
                     <input
+                      value={state.shopName}
+                      onChange={inputHandle}
                       className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
                       type="text"
-                      name="artGalleryName"
+                      name="shopName"
                       id="Art-Gallery-Name"
                       placeholder="Art Gallery Name"
                     />
                   </div>
+
                   <div className="flex flex-col w-full gap-1 mb-2">
-                    <label
-                      htmlFor="division"
-                      className="font-semibold text-black"
-                    >
-                      Division Name :
+                    <label htmlFor="state" className="font-semibold text-black">
+                      State Name :
                     </label>
                     <input
+                      value={state.state}
+                      onChange={inputHandle}
                       className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
                       type="text"
-                      name="division"
-                      id="division"
-                      placeholder="division Name"
+                      name="state"
+                      id="state"
+                      placeholder="State Name"
                     />
                   </div>
+
                   <div className="flex flex-col w-full gap-1 mb-2">
                     <label
                       htmlFor="district"
@@ -167,6 +195,8 @@ const Profile = () => {
                       District Name :
                     </label>
                     <input
+                      value={state.district}
+                      onChange={inputHandle}
                       className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
                       type="text"
                       name="district"
@@ -174,24 +204,69 @@ const Profile = () => {
                       placeholder="District Name"
                     />
                   </div>
+
                   <div className="flex flex-col w-full gap-1 mb-2">
-                    <label
-                      htmlFor="subdis"
-                      className="font-semibold text-black"
-                    >
-                      Sub District Name :
+                    <label htmlFor="city" className="font-semibold text-black">
+                      City Name :
                     </label>
                     <input
+                      value={state.city}
+                      onChange={inputHandle}
                       className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
                       type="text"
-                      name="subdis"
-                      id="subdis"
-                      placeholder="Sub District Name"
+                      name="city"
+                      id="city"
+                      placeholder="City Name"
                     />
                   </div>
 
-                  <button className="bg-stone-700  hover:bg-black hover:text-white text-stone-300 rounded-3xl px-7 py-2 my-2 mt-4">
-                    Save Changes
+                  <div className="flex flex-col w-full gap-1 mb-2">
+                    <label
+                      htmlFor="pincode"
+                      className="font-semibold text-black"
+                    >
+                      Pincode :
+                    </label>
+                    <input
+                      value={state.pincode}
+                      onChange={inputHandle}
+                      className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
+                      type="text"
+                      name="pincode"
+                      id="pincode"
+                      placeholder="Pincode"
+                    />
+                  </div>
+                  <div className="flex flex-col w-full gap-1 mb-2">
+                    <label
+                      htmlFor="mobNum"
+                      className="font-semibold text-black"
+                    >
+                      Contact Number :
+                    </label>
+                    <input
+                      value={state.mobNum}
+                      onChange={inputHandle}
+                      className="px-4 py-2 focus:border-stone-300 outline-none bg-stone-200 border border-stone-900 rounded-xl text-black"
+                      type="text"
+                      name="mobNum"
+                      id="mobNum"
+                      placeholder="Contact Number"
+                    />
+                  </div>
+
+                  <button
+                    disabled={loader ? true : false}
+                    className="bg-stone-700  hover:bg-black hover:text-white text-stone-300 rounded-3xl px-7 py-2 my-2 mt-4"
+                  >
+                    {loader ? (
+                      <PropagateLoader
+                        color="#aaa"
+                        cssOverride={overrideStyle}
+                      />
+                    ) : (
+                      "Submit"
+                    )}
                   </button>
                 </form>
               ) : (
@@ -200,24 +275,28 @@ const Profile = () => {
                     <MdEditSquare className="text-stone-300" />{" "}
                   </span>
                   <div className="flex gap-2">
-                    <span>Shop Name : </span>
-                    <span>Art-X Gallery</span>
+                    <span>Art Gallery Name : </span>
+                    <span>{userInfo.shopInfo?.shopName}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>State : </span>
-                    <span>Maharastra</span>
+                    <span>{userInfo.shopInfo?.state}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>District : </span>
-                    <span>Pune</span>
+                    <span>{userInfo.shopInfo?.district}</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span>City : </span>
+                    <span>{userInfo.shopInfo?.city}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>PinCode : </span>
-                    <span>440011</span>
+                    <span>{userInfo.shopInfo?.pincode}</span>
                   </div>
                   <div className="flex gap-2">
                     <span>Mobile No. : </span>
-                    <span>**********</span>
+                    <span>{userInfo.shopInfo?.mobNum}</span>
                   </div>
                 </div>
               )}
