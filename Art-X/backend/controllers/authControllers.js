@@ -161,6 +161,35 @@ class authControllers {
   };
 
   // End Method profile_image_upload
+
+  profile_info_add = async (req, res) => {
+    // console.log(req.body);
+    // console.log(req);
+    const { state, district, shopName, city, pincode, mobNum } = req.body;
+    const { id } = req;
+    try {
+      await sellerModel.findByIdAndUpdate(id, {
+        shopInfo: {
+          shopName,
+          state,
+          district,
+          city,
+          pincode,
+          mobNum,
+        },
+      });
+
+      const userInfo = await sellerModel.findById(id);
+
+      responseReturn(res, 201, {
+        message: "Profile info Add Successfully",
+        userInfo,
+      });
+    } catch (error) {
+      responseReturn(res, 500, { error: error.message });
+    }
+  };
+  // End profile_info_add Method
 }
 
 module.exports = new authControllers();
