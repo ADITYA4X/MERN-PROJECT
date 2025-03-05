@@ -3,38 +3,31 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Pagination from "../Pagination";
 import { FaChevronDown, FaSearch } from "react-icons/fa";
-
 import { RiListView } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import Search from "../components/Search";
+import { get_seller_request } from "../../store/Reducers/sellerReducer";
 
 const SellerRequest = () => {
+  const dispatch = useDispatch();
+  const { sellers, totalSeller } = useSelector((state) => state.seller);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [perPage, setPerPage] = useState(10);
   const [show, setShow] = useState(false);
 
-  //   for dropdown button
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
   const options = [10, 20];
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
-
   useEffect(() => {
-    // Attach event listener on component mount
-    document.addEventListener("mousedown", handleClickOutside);
-    // Cleanup event listener on component unmount
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+    dispatch(
+      get_seller_request({
+        perPage: parseInt(perPage),
+        page: parseInt(currentPage),
+        searchValue,
+      })
+    );
+  }, [searchValue, currentPage, perPage]);
 
   return (
     <div className="lg:px-9 lg:py-10 py-2 px-2">
@@ -44,52 +37,13 @@ const SellerRequest = () => {
             Seller Request
           </h1>
 
-          <div className="relative md:block ">
-            <input
-              type="text"
-              placeholder="Search"
-              className="px-2 pl-12 py-2 focus:border-stone-400 outline-none border border-stone-300 rounded-3xl text-stone-600 font-normal w-[120px] lg:w-full"
-            />
-            <div className="absolute left-5 top-1/2 transform -translate-y-1/2 text-stone-400 text-md">
-              <FaSearch />
-            </div>
-          </div>
-          {/* Dropdown Button */}
-          <div className="relative w-18 " ref={dropdownRef}>
-            <div
-              className="w-full h-10 rounded-3xl px-4 flex items-center justify-between cursor-pointer hover:border-stone-300 outline-none bg-white border  border-stone-200 text-stone-600 drop-shadow-md duration-300 hover:bg-stone-300"
-              onClick={toggleDropdown}
-              onChange={(e) => setPerPage(parseInt(e.target.value))}
-            >
-              {perPage}
-              <span className="text-[10px] pl-3">
-                <FaChevronDown />
-              </span>{" "}
-              {/* Down Arrow */}
-            </div>
-
-            {/* Dropdown Options */}
-            {isOpen && (
-              <div className="absolute top-full mt-1 w-full bg-white border border-gray-300 rounded-3xl shadow-lg z-[1000]">
-                {options.map((option, index) => (
-                  <div
-                    key={index}
-                    value={option}
-                    className={`text-stone-600 px-6 py-2 hover:bg-stone-200 hover:rounded-3xl cursor-pointer ${
-                      index === 0 ? "rounded-t-lg" : ""
-                    } ${index === options.length - 1 ? "rounded-b-lg" : ""}`}
-                    onClick={() => {
-                      setPerPage(option);
-                      setIsOpen(false);
-                    }}
-                  >
-                    {option}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          {/* Dropdown Button */}
+          <Search
+            perPage={perPage}
+            setPerPage={setPerPage}
+            options={options}
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
+          />
         </div>
 
         <div className="relative overflow-x-auto">

@@ -39,9 +39,6 @@ const Category = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
   const options = [10, 20];
 
   const handleClickOutside = (event) => {
