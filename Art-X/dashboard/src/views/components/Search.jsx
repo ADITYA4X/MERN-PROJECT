@@ -32,7 +32,7 @@ const Search = ({
   }, []);
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center gap-2">
       <div className="relative md:block ">
         <input
           onChange={(e) => setSearchValue(e.target.value)}
