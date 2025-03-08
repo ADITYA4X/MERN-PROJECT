@@ -91,38 +91,38 @@ const SellerRequest = () => {
             </thead>
 
             <tbody>
-              {[1, 2, 3, 4, 5].map((d, i) => (
+              {sellers.map((d, i) => (
                 <tr key={i} className="border-b border-stone-200">
                   <td
                     headers="serialNo"
                     className="py-2 px-8 font-medium whitespace-nowrap "
                   >
-                    {d}
+                    {i + 1}
                   </td>
 
                   <td
                     headers="name"
                     className="py-2 px-8 font-medium whitespace-nowrap "
                   >
-                    Aditya Kumar
+                    {d.name}
                   </td>
                   <td
                     headers="email"
                     className="py-2 px-8 font-medium whitespace-nowrap"
                   >
-                    aditya@gmail.com
+                    {d.email}
                   </td>
                   <td
                     headers="payment"
                     className="py-2 px-8 font-medium whitespace-nowrap"
                   >
-                    <span>Inactive</span>
+                    <span>{d.payment}</span>
                   </td>
                   <td
                     headers="status"
                     className="py-2 px-8 font-medium whitespace-nowrap"
                   >
-                    <span>Pending</span>
+                    <span>{d.status}</span>
                   </td>
 
                   <td
@@ -131,7 +131,7 @@ const SellerRequest = () => {
                   >
                     <div className="flex justify-start items-center gap-3">
                       <Link
-                        to="/admin/dashboard/sellers/details/2"
+                        to={`/admin/dashboard/sellers/details/${d._id}`}
                         className="p-[6px] bg-stone-600 rounded hover:shadow-lg hover:shadow-stone-500/20"
                       >
                         <RiListView className="text-white" />
