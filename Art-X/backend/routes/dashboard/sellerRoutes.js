@@ -7,4 +7,10 @@ router.get(
   authMiddleware,
   sellerController.request_seller_get
 );
+router.get(
+  "/get-seller/:sellerId",
+  authMiddleware,
+  sellerController.get_seller
+);
+
 module.exports = router;

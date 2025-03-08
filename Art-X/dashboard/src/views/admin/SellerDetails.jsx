@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import { TiPlus } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { get_seller } from "../../store/Reducers/sellerReducer";
 
 const SellerDetails = () => {
   const [show, setShow] = useState(false);
@@ -24,6 +26,14 @@ const SellerDetails = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const dispatch = useDispatch();
+  const { seller } = useSelector((state) => state.seller);
+  const { sellerId } = useParams();
+
+  useEffect(() => {
+    dispatch(get_seller(sellerId));
+  }, [sellerId]);
 
   return (
     <div className="lg:px-9 lg:py-10 py-1 px-2">
@@ -53,7 +63,7 @@ const SellerDetails = () => {
                 <div className=" h-screen lg:h-auto px-3 py lg:rounded-[35px] text-stone-700 transition-all duration-900">
                   <div className="flex justify-center items-center flex-col w-[238px]  h-[238px] cursor-pointer border border-dashed hover:border-stone-800 border-stone-400 rounded-[28px] mb-2">
                     <img
-                      src="http://localhost:3001/images/admin.jpg"
+                      src="http://localhost:3002/images/admin.jpg"
                       alt=""
                       className=" rounded-3xl mb-2 "
                     />
