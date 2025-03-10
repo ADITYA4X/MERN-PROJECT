@@ -54,7 +54,7 @@ const SellerDetails = () => {
           <div className="w-full px-3 pt-2 bg-white rounded-[35px] ">
             <div className="relative md:block ">
               <div className="left-5 transform text-stone-800 text-2xl font-bold px-6 py-4">
-                Aditya Kumar
+                {seller?.name}
               </div>
             </div>
 
@@ -62,11 +62,15 @@ const SellerDetails = () => {
               <div className="w-full pl-3 ">
                 <div className=" h-screen lg:h-auto px-3 py lg:rounded-[35px] text-stone-700 transition-all duration-900">
                   <div className="flex justify-center items-center flex-col w-[238px]  h-[238px] cursor-pointer border border-dashed hover:border-stone-800 border-stone-400 rounded-[28px] mb-2">
-                    <img
-                      src="http://localhost:3002/images/admin.jpg"
-                      alt=""
-                      className=" rounded-3xl mb-2 "
-                    />
+                    {seller?.image ? (
+                      <img
+                        src="http://localhost:3002/images/demo.jpg"
+                        alt=""
+                        className=" rounded-3xl mb-2 "
+                      />
+                    ) : (
+                      <span>Image Not Uploaded </span>
+                    )}
                   </div>
 
                   <div className="relative mt-2  border-b border-t border-stone-500 pb-2 overflow-x-auto">
@@ -88,13 +92,13 @@ const SellerDetails = () => {
                             headers="orderId"
                             className="py- font-medium whitespace-nowrap"
                           >
-                            Stars Rating
+                            {seller?.rating || "09/10"}
                           </td>
                           <td
                             headers="price"
                             className="py-1font-medium whitespace-nowrap"
                           >
-                            Illustration Work
+                            {seller?.artForm || "Traditional Art Form"}
                           </td>
                         </tr>
                       </tbody>
@@ -176,13 +180,13 @@ const SellerDetails = () => {
                         headers="orderId"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        Aditya Kumar
+                        {seller?.name}
                       </td>
                       <td
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        +91-XXXX-XXXX
+                        {seller?.contact || "091-XXXX-XXXX"}
                       </td>
                     </tr>
                   </tbody>
@@ -203,7 +207,7 @@ const SellerDetails = () => {
                         headers="email"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        adityakumar@gamil.com
+                        {seller?.email}
                       </td>
                     </tr>
                   </tbody>
@@ -227,13 +231,13 @@ const SellerDetails = () => {
                         headers="orderId"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        Active
+                        {seller?.status}
                       </td>
                       <td
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        Active
+                        {seller?.payment || "Pending"}
                       </td>
                     </tr>
                   </tbody>
@@ -258,7 +262,7 @@ const SellerDetails = () => {
                         Shop Name
                       </th>
                       <th id="price" className="py-3 ">
-                        Shop Phone
+                        State Name
                       </th>
                     </tr>
                   </thead>
@@ -269,13 +273,13 @@ const SellerDetails = () => {
                         headers="orderId"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        Illuminati Shop
+                        {seller?.shopInfo?.shopName}
                       </td>
                       <td
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        071-XXXX-XXXX
+                        {seller?.shopInfo?.state}
                       </td>
                     </tr>
                   </tbody>
@@ -285,10 +289,10 @@ const SellerDetails = () => {
                   <thead className="text-[14px] text-stone-700 uppercase text-center ">
                     <tr>
                       <th id="orderId" className="py-3  ">
-                        Shop Email
+                        Shop District
                       </th>
                       <th id="price" className="py-3 ">
-                        Shop Location
+                        City Name
                       </th>
                     </tr>
                   </thead>
@@ -299,13 +303,13 @@ const SellerDetails = () => {
                         headers="orderId"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        illum@gamil.com
+                        {seller?.shopInfo?.district}
                       </td>
                       <td
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        Pune, Maharastra
+                        {seller?.shopInfo?.city}
                       </td>
                     </tr>
                   </tbody>
