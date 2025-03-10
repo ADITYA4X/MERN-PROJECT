@@ -3,7 +3,12 @@ import { TiPlus } from "react-icons/ti";
 import { IoCloseSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { get_seller } from "../../store/Reducers/sellerReducer";
+import {
+  get_seller,
+  messageClear,
+  seller_status_update,
+} from "../../store/Reducers/sellerReducer";
+import toast from "react-hot-toast";
 
 const SellerDetails = () => {
   const [show, setShow] = useState(false);
@@ -28,12 +33,36 @@ const SellerDetails = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const { seller } = useSelector((state) => state.seller);
+  const { seller, successMessage } = useSelector((state) => state.seller);
   const { sellerId } = useParams();
 
   useEffect(() => {
     dispatch(get_seller(sellerId));
   }, [sellerId]);
+
+  const [status, setStatus] = useState("");
+  const submit = (e) => {
+    e.preventDefault();
+    dispatch(
+      seller_status_update({
+        sellerId,
+        status,
+      })
+    );
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+    }
+  }, [successMessage]);
+
+  useEffect(() => {
+    if (seller) {
+      setStatus(seller.status);
+    }
+  }, [seller]);
 
   return (
     <div className="lg:px-9 lg:py-10 py-1 px-2">
@@ -42,7 +71,7 @@ const SellerDetails = () => {
           onClick={() => setShow(true)}
           className="flex justify-center items-center gap-1 bg-stone-600 text-stone-200 px-6 py-2 rounded-3xl hover:bg-stone-700 "
         >
-          Aditya Kumar
+          {seller?.name}
           <span>
             <TiPlus />
           </span>
@@ -78,7 +107,7 @@ const SellerDetails = () => {
                       <thead className="text-[14px] text-stone-700 uppercase text-center ">
                         <tr>
                           <th id="orderId" className="py-3  ">
-                            Review
+                            Shop Name
                           </th>
                           <th id="price" className="py-3 ">
                             Art-Form
@@ -92,7 +121,7 @@ const SellerDetails = () => {
                             headers="orderId"
                             className="py- font-medium whitespace-nowrap"
                           >
-                            {seller?.rating || "09/10"}
+                            {seller?.shopInfo?.shopName}
                           </td>
                           <td
                             headers="price"
@@ -105,21 +134,30 @@ const SellerDetails = () => {
                     </table>
                   </div>
 
-                  <form className="flex justify-center items-center gap-2 mb-3 mt-1">
-                    <select className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-2 py-2 text-center">
-                      <option className="text-center" value="">
-                        --Select Status--
-                      </option>
-                      <option className="text-center" value="">
-                        Active
-                      </option>
-                      <option className="text-center" value="">
-                        Deactive
-                      </option>
-                    </select>
-                    <button className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2">
-                      Submit
-                    </button>
+                  <form onSubmit={submit}>
+                    <div className="flex justify-center items-center gap-2 mb-3 mt-1">
+                      <select
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                        className="w-full bg-stone-500 hover:bg-stone-700  text-white rounded-3xl mt-2 px-2 py-2 text-center"
+                        name="status"
+                        id="status"
+                        required
+                      >
+                        <option className="text-center" value="">
+                          --Select Status--
+                        </option>
+                        <option className="text-center" value="active">
+                          Active
+                        </option>
+                        <option className="text-center" value="deactive">
+                          Deactive
+                        </option>
+                      </select>
+                      <button className="w-full bg-stone-500 hover:bg-stone-700 hover:shadow-sm text-white rounded-3xl mt-2 px-7 py-2">
+                        Submit
+                      </button>
+                    </div>
                   </form>
                 </div>
               </div>
@@ -186,7 +224,7 @@ const SellerDetails = () => {
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        {seller?.contact || "091-XXXX-XXXX"}
+                        {seller?.shopInfo?.mobNum}
                       </td>
                     </tr>
                   </tbody>
@@ -289,10 +327,10 @@ const SellerDetails = () => {
                   <thead className="text-[14px] text-stone-700 uppercase text-center ">
                     <tr>
                       <th id="orderId" className="py-3  ">
-                        Shop District
+                        Address
                       </th>
                       <th id="price" className="py-3 ">
-                        City Name
+                        Pincode
                       </th>
                     </tr>
                   </thead>
@@ -303,13 +341,13 @@ const SellerDetails = () => {
                         headers="orderId"
                         className="py- font-medium whitespace-nowrap"
                       >
-                        {seller?.shopInfo?.district}
+                        {seller?.shopInfo?.city}, {seller?.shopInfo?.district}
                       </td>
                       <td
                         headers="price"
                         className="py-1font-medium whitespace-nowrap"
                       >
-                        {seller?.shopInfo?.city}
+                        {seller?.shopInfo?.pincode}
                       </td>
                     </tr>
                   </tbody>
