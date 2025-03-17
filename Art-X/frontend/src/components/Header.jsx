@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { MdEmail } from "react-icons/md";
-import { IoMdPhonePortrait } from "react-icons/io";
-import { FaInstagram, FaList, FaLock, FaUser } from "react-icons/fa";
+import { IoIosArrowDown, IoMdPhonePortrait } from "react-icons/io";
+import {
+  FaInstagram,
+  FaInstagramSquare,
+  FaList,
+  FaLock,
+  FaPhoneAlt,
+  FaUser,
+} from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
@@ -14,6 +21,7 @@ const Header = () => {
   const { pathname } = useLocation();
 
   const [showSidebar, setShowSidebar] = useState(true);
+  const [categoryShow, setCategoryShow] = useState(true);
   const user = true;
 
   const wishlist_count = 3;
@@ -28,7 +36,7 @@ const Header = () => {
                 <span>
                   <MdEmail />
                 </span>
-                <span>supportartx@gmail.com</span>
+                <span>support-art-X@gmail.com</span>
               </li>
 
               <li className="flex relative justify-center items-center gap-2 text-sm ">
@@ -206,7 +214,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
       <div className="hidden md-lg:block">
         <div
           onClick={() => setShowSidebar(true)}
@@ -227,7 +234,7 @@ const Header = () => {
 
             <div className="flex justify-start items-center gap-10">
               <div className="flex group cursor-pointer text-slate-800 text-sm justify-center items-center gap-1 relative after:h-[18px] after:w-[1px] after:bg-[#afafaf] after:-right-[16px] after:absolute ">
-                <div className="shape flex justify-center items-center bg-stone-400 w-[30px] h-[30px] rounded-full">
+                <div className="shape flex justify-center items-center bg-white w-[30px] h-[30px] rounded-full">
                   <img src="http://localhost:3000/images/language.png" alt="" />
                 </div>
                 <span>
@@ -313,6 +320,72 @@ const Header = () => {
                 </Link>
               </li>
             </ul>
+
+            <div className="flex justify-start items-center gap-4 text-black">
+              <a href="#">
+                <FaInstagram />
+              </a>
+              <a href="#">
+                <FaTwitter />{" "}
+              </a>
+              <a href="#">
+                <FaLinkedin />
+              </a>
+              <a href="#">
+                <FaGithub />{" "}
+              </a>
+            </div>
+
+            <div className="w-full flex justify-end md-lg:justify-start gap-3 items-center">
+              <div className="w-[48px] h-[48px] rounded-full flex bg-[#f5f5f5] justify-center items-center ">
+                <span>
+                  <FaPhoneAlt />
+                </span>
+              </div>
+              <div className="flex justify-end flex-col gap-1">
+                <h2 className="text-sm font-medium text-slate-700">
+                  +91-987654321
+                </h2>
+                <span className="text-xs">Support 24/7</span>
+              </div>
+            </div>
+
+            <ul className="flex flex-col justify-start items-start gap-3 text-[#1c1c1c]">
+              <li className="flex justify-start items-center gap-2 text-sm">
+                <span>
+                  <MdEmail />
+                </span>
+                <span>support-art-X@gmail.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-[85%] lg:w-[90%] mx-auto">
+        <div className="flex w-full flex-wrap md-lg:gap-8">
+          <div className="w-3/12 md-lg:w-full">
+            <div className="bg-white relative">
+              <div
+                onClick={() => setCategoryShow(!categoryShow)}
+                className="h-[50px] bg-stone-700 text-white flex justify-center md-lg:justify-between md-lg:px-6 items-center gap-3 font-bold text-md cursor-pointer"
+              >
+                <div className="flex justify-center items-center gap-3">
+                  <span>
+                    <FaList />
+                  </span>
+                  <span>All Category </span>
+                </div>
+                <span className="pt-1">
+                  <IoIosArrowDown />
+                </span>
+              </div>
+              <div
+                className={`${
+                  categoryShow ? "h-0" : "h-[400px]"
+                } overflow-hidden transition-all md-lg:relative duration-500 absolute z-[99999] bg-stone-100 w-full border-x`}
+              ></div>
+            </div>
           </div>
         </div>
       </div>
