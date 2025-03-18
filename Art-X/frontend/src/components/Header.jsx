@@ -25,6 +25,26 @@ const Header = () => {
   const user = true;
 
   const wishlist_count = 3;
+  const categorys = [
+    "Thangka",
+    "Mithila",
+    "Madhubani",
+    "Warli",
+    "Pattachitra",
+    "Kalamkari",
+    "Tanjore",
+    "Miniature",
+    "Phad",
+    "Pichwai",
+    "Illustrations",
+    "Landscape",
+    "Minimal",
+    "Abstract",
+    "Modern",
+  ];
+
+  const [searchValue, setSearchValue] = useState("");
+  const [category, setCategory] = useState("");
 
   return (
     <div className="w-full bg-white">
@@ -384,7 +404,69 @@ const Header = () => {
                 className={`${
                   categoryShow ? "h-0" : "h-[400px]"
                 } overflow-hidden transition-all md-lg:relative duration-500 absolute z-[99999] bg-stone-100 w-full border-x`}
-              ></div>
+              >
+                <ul className="py-2 text-stone-600 font-medium">
+                  {categorys.map((c, i) => {
+                    return (
+                      <li
+                        key={i}
+                        className="flex justify-start items-center gap-2 px-[24px] py-[6px]"
+                      >
+                        <Link className="text-sm block">{c}</Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-9/12 pl-8 md-lg:pl-0 md-lg:w-full">
+            <div className="flex flex-wrap w-full justify-between items-center md-lg:gap-6">
+              <div className="w-8/12 md-lg:w-full">
+                <div className="flex border h-[50px] items-center relative gap-6">
+                  <div className="relative after:absolute after:h-[25px] after:w-[1px] after:bg-[#afafaf] after:-right-[15px] md:hidden">
+                    <select
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-[150px] text-slate-600 font-semibold bg-transparent px-2 h-full outline-0 border-none"
+                      name=""
+                      id=""
+                    >
+                      <option value="">Select Category</option>
+                      {categorys.map((c, i) => (
+                        <option value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <input
+                    className="w-full relative bg-transparent text-slate-500 outline-0 px-3 h-full"
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="Search here..."
+                  />
+                  <button className="bg-stone-600 right-0 absolute px-8 h-full font-semibold uppercase text-white">
+                    Search
+                  </button>
+                </div>
+              </div>
+
+              <div className="w-4/12 block md-lg:hidden pl-2 md-lg:w-full md-lg:pl-0">
+                <div className="w-full flex justify-end md-lg:justify-start gap-3 items-center">
+                  <div className="w-[48px] h-[48px] rounded-full flex bg-[#f5f5f5] justify-center items-center ">
+                    <span>
+                      <FaPhoneAlt />
+                    </span>
+                  </div>
+                  <div className="flex justify-end flex-col gap-1">
+                    <h2 className="text-md font-medium text-slate-700">
+                      +91-987654321
+                    </h2>
+                    <span className="text-sm">Support 24/7</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
