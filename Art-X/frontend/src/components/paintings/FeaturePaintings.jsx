@@ -1,4 +1,7 @@
 import React from "react";
+import { FaEye, FaRegHeart } from "react-icons/fa";
+import { RiShoppingCartLine } from "react-icons/ri";
+import Rating from "../Rating";
 
 const FeaturePaintings = () => {
   return (
@@ -6,7 +9,7 @@ const FeaturePaintings = () => {
       <div className="w-full">
         <div className="text-center flex justify-center items-center flex-col text-4xl text-slate-600 font-bold relative pb-[45px]">
           <h2>Feature Paintings </h2>
-          <div className="w-[100px] h-[2px] bg-[#059473] mt-4"></div>
+          <div className="w-[100px] h-[2px] bg-orange-600 mt-4 "></div>
         </div>
       </div>
 
@@ -22,10 +25,35 @@ const FeaturePaintings = () => {
               </div>
 
               <img
-                className="sm:w-full h-[240px]"
+                className="sm:w-full w-full h-[240px]"
                 src={`http://localhost:3000/images/paintings/${i + 1}.jpg`}
                 alt=""
               />
+
+              <ul className="flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
+                <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600  hover:text-white hover:rotate-[720deg] transition-all">
+                  <FaRegHeart />
+                </li>
+                <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600  hover:text-white hover:rotate-[720deg] transition-all">
+                  <FaEye />
+                </li>
+                <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600 hover:text-white hover:rotate-[720deg] transition-all">
+                  <RiShoppingCartLine />
+                </li>
+              </ul>
+            </div>
+
+            <div className="py-3 text-slate-600 px-2">
+              <h2 className="font-bold">Painting Name </h2>
+              <div className="flex justify-start items-center gap-3">
+                <span className="text-md font-semibold">
+                  Price: &#8377; 2000
+                </span>
+
+                <div className="flex">
+                  <Rating ratings={4.5} />
+                </div>
+              </div>
             </div>
           </div>
         ))}
