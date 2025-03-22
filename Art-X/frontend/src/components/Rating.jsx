@@ -66,7 +66,7 @@ const Rating = ({ ratings }) => {
           <FaStarHalfAlt />
         </span>
       ) : (
-        <span className="text-stone-9 00">
+        <span className="text-stone-900">
           <CiStar />
         </span>
       )}

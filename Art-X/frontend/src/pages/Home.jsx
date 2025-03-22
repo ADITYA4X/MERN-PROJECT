@@ -4,6 +4,7 @@ import Banner from "../components/Banner";
 import Categorys from "../components/Categorys";
 import FeaturePaintings from "../components/paintings/FeaturePaintings";
 import Paintings from "../components/paintings/Paintings";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -14,7 +15,6 @@ const Home = () => {
       <div className="py-[45px]">
         <FeaturePaintings />
       </div>
-
       <div className="py-10">
         <div className="w-[85%] flex flex-wrap mx-auto">
           <div className="grid w-full grid-cols-3 md-lg:grid-cols-2 md:grid-cols-1 gap-7">
@@ -32,6 +32,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

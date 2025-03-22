@@ -32,21 +32,21 @@ const Paintings = ({ title }) => {
   const ButtonGroup = ({ next, previous }) => {
     return (
       <div className="flex justify-between items-center">
-        <div className="text-xl font-bold text-slate-600"> {title} </div>
-        <div className="flex justify-center items-center gap-3 text-slate-600">
-          <button
-            onClick={() => previous()}
-            className="w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200"
-          >
-            <IoIosArrowBack />
-          </button>
-          <button
-            onClick={() => next()}
-            className="w-[30px] h-[30px] flex justify-center items-center bg-slate-300 border border-slate-200"
-          >
-            <IoIosArrowForward />
-          </button>
-        </div>
+        <button
+          onClick={() => previous()}
+          className="w-[30px] h-[30px] flex justify-center items-center bg-transparent border border-stone-200"
+        >
+          <IoIosArrowBack />
+        </button>
+
+        <div className="text-2xl font-bold text-stone-600"> {title} </div>
+
+        <button
+          onClick={() => next()}
+          className="w-[30px] h-[30px] flex justify-center items-center bg-transparent border border-stone-200"
+        >
+          <IoIosArrowForward />
+        </button>
       </div>
     );
   };
@@ -66,7 +66,7 @@ const Paintings = ({ title }) => {
           return (
             <div className="flex flex-col justify-start gap-2">
               {painting.map((item, index) => (
-                <Link className="flex justify-start items-start" to="#">
+                <Link className="flex justify-center items-start" to="#">
                   <img
                     className="w-[110px] h-[110px]"
                     src={`http://localhost:3000/images/paintings/${item}.jpg`}
