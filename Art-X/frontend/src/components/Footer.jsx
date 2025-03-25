@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -82,8 +84,47 @@ const Footer = () => {
                 Subscribe
               </button>
             </div>
+            <ul className="flex justify-start items-center gap-3">
+              <li>
+                <a
+                  className="w-[38px] h-[38px] hover:bg-black  hover:text-white text-stone-800 flex justify-center items-center bg-white rounded-full"
+                  href="#"
+                >
+                  <FaInstagram />{" "}
+                </a>
+              </li>
+
+              <li>
+                <a
+                  className="w-[38px] h-[38px] hover:bg-black  text-stone-800 hover:text-white flex justify-center items-center bg-white rounded-full"
+                  href="#"
+                >
+                  <FaTwitter />{" "}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="w-[38px] h-[38px] hover:bg-black hover:text-white text-stone-800 flex justify-center items-center bg-white rounded-full"
+                  href="#"
+                >
+                  <FaLinkedin />{" "}
+                </a>
+              </li>
+              <li>
+                <a
+                  className="w-[38px] h-[38px] hover:bg-black text-stone-800 hover:text-white flex justify-center items-center bg-white rounded-full"
+                  href="#"
+                >
+                  <FaGithub />{" "}
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
+
+      <div className="w-[90%] flex flex-wrap justify-center items-center text-stone-200 mx-auto py-5 text-center">
+        <span>Copiright @ 2025 All Rights Reserved </span>
       </div>
     </footer>
   );
