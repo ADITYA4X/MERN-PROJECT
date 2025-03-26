@@ -152,6 +152,7 @@ const Header = () => {
                 <ul className="flex justify-start items-start gap-8 text-sm font-bold uppercase md-lg:hidden">
                   <li>
                     <Link
+                      to="/"
                       className={`p-2 inline-block border-b-4 ${
                         pathname === "/"
                           ? "text-stone-900 border-stone-900"
@@ -164,8 +165,9 @@ const Header = () => {
 
                   <li>
                     <Link
+                      to="/shops"
                       className={`p-2 block ${
-                        pathname === "/"
+                        pathname === "/shops"
                           ? "text-stone-900 border-stone-900"
                           : "text-slate-600 border-transparent"
                       } `}
@@ -293,6 +295,7 @@ const Header = () => {
             <ul className="flex flex-col justify-start items-start text-sm font-bold uppercase">
               <li>
                 <Link
+                  to="/"
                   className={`py-2 block ${
                     pathname === "/" ? "text-[#059473]" : "text-slate-600"
                   } `}
@@ -303,8 +306,9 @@ const Header = () => {
 
               <li>
                 <Link
+                  to="/shops"
                   className={`py-2 block ${
-                    pathname === "/shop" ? "text-[#059473]" : "text-slate-600"
+                    pathname === "/shops" ? "text-[#059473]" : "text-slate-600"
                   } `}
                 >
                   Shop
