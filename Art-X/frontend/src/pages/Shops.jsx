@@ -6,6 +6,10 @@ import { IoIosArrowForward } from "react-icons/io";
 import { Range } from "react-range";
 import { AiFillStar } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
+import Paintings from "./../components/paintings/Paintings";
+import { FaThList } from "react-icons/fa";
+import { BsFillGridFill } from "react-icons/bs";
+import ShopPaintings from "../components/paintings/ShopPaintings";
 
 const Shops = () => {
   const [filter, setFilter] = useState(true);
@@ -30,6 +34,7 @@ const Shops = () => {
 
   const [state, setState] = useState({ values: [500, 1500] });
   const [rating, setRating] = useState("");
+  const [styles, setStyles] = useState("grid");
 
   return (
     <div>
@@ -113,137 +118,187 @@ const Shops = () => {
                     />
                   )}
                 />
+                <div>
+                  <span className="text-slate-800 font-bold text-lg">
+                    ${Math.floor(state.values[0])} - $
+                    {Math.floor(state.values[1])}
+                  </span>
+                </div>
               </div>
-              <span className="text-slate-800 font-bold text-lg">
-                ${Math.floor(state.values[0])} - ${Math.floor(state.values[1])}
-              </span>
+
+              <div className="py-3 flex flex-col gap-4">
+                <h2 className="text-3xl font-bold mb-3 text-slate-600">
+                  Rating{" "}
+                </h2>
+                <div className="flex flex-col gap-3">
+                  <div
+                    onClick={() => setRating(5)}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => setRating(4)}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => setRating(3)}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => setRating(2)}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => setRating(1)}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
+                    <span>
+                      <AiFillStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                  </div>
+
+                  <div className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer">
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                    <span>
+                      <CiStar />{" "}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="py-5 flex flex-col gap-4 md:hidden">
+                <Paintings title="Latest Painting" />
+              </div>
             </div>
-          </div>
-
-          <div className="py-3 flex flex-col gap-4">
-            <h2 className="text-3xl font-bold mb-3 text-slate-600">Rating </h2>
-            <div className="flex flex-col gap-3">
-              <div
-                onClick={() => setRating(5)}
-                className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
-              >
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-              </div>
-
-              <div
-                onClick={() => setRating(4)}
-                className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
-              >
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-              </div>
-
-              <div
-                onClick={() => setRating(3)}
-                className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
-              >
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-              </div>
-
-              <div
-                onClick={() => setRating(2)}
-                className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
-              >
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-              </div>
-
-              <div
-                onClick={() => setRating(1)}
-                className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
-              >
-                <span>
-                  <AiFillStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-              </div>
-
-              <div className="text-orange-500 flex justify-start items-start gap-2 text-xl cursor-pointer">
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
-                <span>
-                  <CiStar />{" "}
-                </span>
+            <div className="w-9/12 md-lg:w-8/12 md:w-full">
+              <div className="pl-8 md:pl-0">
+                <div className="py-4 bg-white mb-10 px-3 rounded-md flex justify-between items-start border">
+                  <h2 className="text-lg font-medium text-stone-600">
+                    14 Products{" "}
+                  </h2>
+                  <div className="flex justify-center items-center gap-3">
+                    <select
+                      className="p-1 border outline-0 text-stone-600 font-semibold"
+                      name=""
+                      id=""
+                    >
+                      <option value="">Sort By</option>
+                      <option value="low-to-high">Low to High Price</option>
+                      <option value="high-to-low">High to Low Price </option>
+                    </select>
+                    <div className="flex justify-center items-start gap-4 md-lg:hidden">
+                      <div
+                        onClick={() => setStyles("grid")}
+                        className={`p-2 ${
+                          styles === "grid" && "bg-stone-300"
+                        } text-stone-600 hover:bg-stone-300 cursor-pointer rounded-sm `}
+                      >
+                        <BsFillGridFill />
+                      </div>
+                      <div
+                        onClick={() => setStyles("list")}
+                        className={`p-2 ${
+                          styles === "list" && "bg-slate-300"
+                        } text-stone-600 hover:bg-stone-300 cursor-pointer rounded-sm `}
+                      >
+                        <FaThList />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="pb-8">
+                  <ShopPaintings styles={styles} />
+                </div>
               </div>
             </div>
           </div>
