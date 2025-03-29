@@ -10,6 +10,7 @@ import Paintings from "./../components/paintings/Paintings";
 import { FaThList } from "react-icons/fa";
 import { BsFillGridFill } from "react-icons/bs";
 import ShopPaintings from "../components/paintings/ShopPaintings";
+import Pagination from "../components/Pagination";
 
 const Shops = () => {
   const [filter, setFilter] = useState(true);
@@ -35,6 +36,8 @@ const Shops = () => {
   const [state, setState] = useState({ values: [500, 1500] });
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
+  const [parPage, setParPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
 
   return (
     <div>
@@ -264,7 +267,7 @@ const Shops = () => {
               <div className="pl-8 md:pl-0">
                 <div className="py-4 bg-white mb-10 px-3 rounded-md flex justify-between items-start border">
                   <h2 className="text-lg font-medium text-stone-600">
-                    14 Products{" "}
+                    14 Paintings{" "}
                   </h2>
                   <div className="flex justify-center items-center gap-3">
                     <select
@@ -298,6 +301,16 @@ const Shops = () => {
                 </div>
                 <div className="pb-8">
                   <ShopPaintings styles={styles} />
+                </div>
+
+                <div>
+                  <Pagination
+                    pageNumber={pageNumber}
+                    setPageNumber={setPageNumber}
+                    totalItem={10}
+                    parPage={parPage}
+                    showItem={Math.floor(10 / 3)}
+                  />
                 </div>
               </div>
             </div>

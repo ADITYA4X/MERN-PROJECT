@@ -1,4 +1,7 @@
 import React from "react";
+import { FaEye, FaRegHeart } from "react-icons/fa";
+import { RiShoppingCartLine } from "react-icons/ri";
+import Rating from "../Rating";
 
 const ShopPaintings = ({ styles }) => {
   return (
@@ -21,14 +24,37 @@ const ShopPaintings = ({ styles }) => {
           <div
             className={
               styles === "grid"
-                ? "w-full relative group h-[210px] md:h-[270px] xs:h-[170px] overflow-hidden"
-                : "md-lg:w-full relative group h-[210px] md:h-[270px] overflow-hidden"
+                ? "w-full relative group h-[260px] md:h-[270px] xs:h-[170px] overflow-hidden "
+                : "md-lg:w-full relative group h-[240px] md:h-[270px] w-[240px] overflow-hidden"
             }
           >
             <img
-              src={`http://localhost:3000/images/products/${i + 1}.webp`}
+              className="h-[240px] rounded-md md:h-[270px] xs:h-[170px] w-full"
+              src={`http://localhost:3000/images/paintings/${i + 1}.jpg`}
               alt=""
             />
+
+            <ul className="flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3">
+              <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600  hover:text-white hover:rotate-[720deg] transition-all">
+                <FaRegHeart />
+              </li>
+              <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600  hover:text-white hover:rotate-[720deg] transition-all">
+                <FaEye />
+              </li>
+              <li className="w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-stone-600 hover:text-white hover:rotate-[720deg] transition-all">
+                <RiShoppingCartLine />
+              </li>
+            </ul>
+          </div>
+
+          <div className="flex justify-start items-start flex-col gap-1">
+            <h2 className="font-bold">Product Name </h2>
+            <div className="flex justify-start items-center gap-3">
+              <span className="text-md font-semibold">$656</span>
+              <div className="flex">
+                <Rating ratings={4.5} />
+              </div>
+            </div>
           </div>
         </div>
       ))}
