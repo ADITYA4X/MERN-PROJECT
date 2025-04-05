@@ -1,13 +1,25 @@
-import React from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Rating from "../components/Rating";
+import {
+  FaGithub,
+  FaHeart,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa";
 
 const Details = () => {
-  const images = [1, 2, 3, 4, 5, 6];
+  const images = [1, 2, 3, 4, 5];
+  const [image, setImage] = useState("");
+  const discount = 20;
+  const stock = 3;
 
   const responsive = {
     superLargeDesktop: {
@@ -85,7 +97,11 @@ const Details = () => {
               <div className="p-5 border">
                 <img
                   className="h-[400px] w-full"
-                  src="http://localhost:3000/images/paintings/2.jpg"
+                  src={
+                    image
+                      ? `http://localhost:3000/images/paintings/${image}.jpg`
+                      : `http://localhost:3000/images/paintings/${images[2]}.jpg`
+                  }
                   alt=""
                 />
               </div>
@@ -99,10 +115,10 @@ const Details = () => {
                   >
                     {images.map((img, i) => {
                       return (
-                        <div>
+                        <div key={i} onClick={() => setImage(img)}>
                           <img
                             className="h-[120px] cursor-pointer"
-                            src={`http://localhost:3000/images/products/${img}.webp`}
+                            src={`http://localhost:3000/images/paintings/${img}.jpg`}
                             alt=""
                           />
                         </div>
@@ -110,6 +126,131 @@ const Details = () => {
                     })}
                   </Carousel>
                 )}
+              </div>
+            </div>
+            <div className="flex flex-col gap-5">
+              <div className="text-3xl text-slate-600 font-bold">
+                <h3>Painting Name </h3>
+              </div>
+              <div className="flex justify-start items-center gap-4">
+                <div className="flex text-xl">
+                  <Rating ratings={4.5} />
+                </div>
+                <span className="text-green-700">(2 reviews)</span>
+              </div>
+
+              <div className="text-2xl text-red-600 font-bold flex gap-3">
+                {discount !== 0 ? (
+                  <>
+                    Price : <h2 className="line-through">&#8377;5000</h2>
+                    <h2>
+                      &#8377;{5000 - Math.floor((5000 * discount) / 100)} (-
+                      {discount}%){" "}
+                    </h2>
+                  </>
+                ) : (
+                  <h2> Price : &#8377;2000 </h2>
+                )}
+              </div>
+
+              <div className="text-slate-600">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley
+                </p>
+              </div>
+              <div className="flex gap-3 pb-10 border-b">
+                {stock ? (
+                  <>
+                    <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl">
+                      <div className="px-6 cursor-pointer">-</div>
+                      <div className="px-6">2</div>
+                      <div className="px-6 cursor-pointer">+</div>
+                    </div>
+                    <div>
+                      <button className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:bg-stone-900 bg-stone-600 text-white">
+                        Add To Card
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
+
+                <div>
+                  <div className="h-[50px] w-[50px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:bg-stone-900 bg-stone-600 text-white">
+                    <FaHeart />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex py-5 gap-5">
+                <div className="w-[150px] text-black font-bold text-xl flex flex-col gap-5">
+                  <span>Availability</span>
+                  <span>Share On</span>
+                </div>
+                <div className="flex flex-col gap-5">
+                  <span className={`text-${stock ? "green" : "red"}-500`}>
+                    {stock ? `In Stock(${stock})` : "Out Of Stock"}
+                  </span>
+
+                  <ul className="flex justify-start items-center gap-3">
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-black hover:text-white flex justify-center items-center bg-stone-600 rounded-full text-white"
+                        href="#"
+                      >
+                        {" "}
+                        <FaInstagram />{" "}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-black hover:text-white flex justify-center items-center bg-stone-600 rounded-full text-white"
+                        href="#"
+                      >
+                        {" "}
+                        <FaTwitter />{" "}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-black hover:text-white flex justify-center items-center bg-stone-600 rounded-full text-white"
+                        href="#"
+                      >
+                        {" "}
+                        <FaLinkedin />{" "}
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="w-[38px] h-[38px] hover:bg-black hover:text-white flex justify-center items-center bg-stone-600 rounded-full text-white"
+                        href="#"
+                      >
+                        {" "}
+                        <FaGithub />{" "}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                {stock ? (
+                  <button className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:bg-black  bg-stone-700 text-white">
+                    Buy Now
+                  </button>
+                ) : (
+                  ""
+                )}
+                <Link
+                  to="#"
+                  className="px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:bg-black bg-stone-700 text-white"
+                >
+                  Chat Seller
+                </Link>
               </div>
             </div>
           </div>
