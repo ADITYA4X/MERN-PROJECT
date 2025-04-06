@@ -14,12 +14,14 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
+import Reviews from "../components/Reviews";
 
 const Details = () => {
   const images = [1, 2, 3, 4, 5];
   const [image, setImage] = useState("");
   const discount = 20;
   const stock = 3;
+  const [state, setState] = useState("reviews");
 
   const responsive = {
     superLargeDesktop: {
@@ -251,6 +253,100 @@ const Details = () => {
                 >
                   Chat Seller
                 </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="w-[85%] md:w-[80%] sm:w-[90%] lg:w-[90%] h-full mx-auto pb-16">
+          <div className="flex flex-wrap">
+            <div className="w-[72%] md-lg:w-full">
+              <div className="pr-4 md-lg:pr-0">
+                <div className="grid grid-cols-2">
+                  <button
+                    onClick={() => setState("reviews")}
+                    className={`py-1 hover:text-white px-5 hover:bg-[#059473] ${
+                      state === "reviews"
+                        ? "bg-[#059473] text-white"
+                        : "bg-slate-200 text-slate-700"
+                    } rounded-sm`}
+                  >
+                    Reviews{" "}
+                  </button>
+
+                  <button
+                    onClick={() => setState("description")}
+                    className={`py-1 hover:text-white px-5 hover:bg-[#059473] ${
+                      state === "description"
+                        ? "bg-[#059473] text-white"
+                        : "bg-slate-200 text-slate-700"
+                    } rounded-sm`}
+                  >
+                    Description{" "}
+                  </button>
+                </div>
+
+                <div>
+                  {state === "reviews" ? (
+                    <Reviews />
+                  ) : (
+                    <p className="py-5 text-slate-600">
+                      What is Lorem Ipsum? Lorem Ipsum is simply dummy text of
+                      the printing and typesetting industry. Lorem Ipsum has
+                      been the industry's standard dummy text ever since the
+                      1500s, when an unknown printer took a galley of type and
+                      scrambled it to make a type specimen book. It has survived
+                      not only five centuries, but also the leap into electronic
+                      typesetting, remaining essentially unchanged. It was
+                      popularised in the 1960s with the release of Letraset
+                      sheets containing Lorem Ipsum passages, and more recently
+                      with desktop publishing software like Aldus PageMaker
+                      including versions of Lorem Ipsum.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="w-[28%] md-lg:w-full">
+              <div className="pl-4 md-lg:pl-0">
+                <div className="px-3 py-2 text-slate-600 bg-slate-200">
+                  <h2 className="font-bold">From Art-X Gallery</h2>
+                </div>
+
+                <div className="flex flex-col gap-5 mt-3 border p-3">
+                  {[1, 2, 3].map((p, i) => {
+                    return (
+                      <Link className="block">
+                        <div className="relative h-[270px]">
+                          <img
+                            className="w-full h-full"
+                            src={`http://localhost:3000/images/paintings/${p}.jpg`}
+                            alt=""
+                          />
+                          {discount !== 0 && (
+                            <div className="flex justify-center items-center absolute text-white w-[38px] h-[38px] rounded-full bg-red-500 font-semibold text-xs left-2 top-2">
+                              {discount}%
+                            </div>
+                          )}
+                        </div>
+
+                        <h2 className="text-slate-600 py-1 font-bold">
+                          Painting Name{" "}
+                        </h2>
+                        <div className="flex gap-2">
+                          <h2 className="text-lg font-bold text-slate-600">
+                            &#8377; 434
+                          </h2>
+                          <div className="flex items-center gap-2">
+                            <Rating ratings={4.5} />
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
