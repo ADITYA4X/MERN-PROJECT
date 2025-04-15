@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import api from "../../api/api";
 
 export const get_category = createAsyncThunk(
   "painting/get_category",
@@ -8,7 +9,7 @@ export const get_category = createAsyncThunk(
       console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
-      console.log(error.respone);
+      console.log(error.response);
     }
   }
 );
