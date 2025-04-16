@@ -3,25 +3,7 @@ import Carousel from "react-multi-carousel";
 import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 
-const Categorys = () => {
-  const categorys = [
-    "Thangka",
-    "Mithila",
-    "Madhubani",
-    "Warli",
-    "Pattachitra",
-    "Kalamkari",
-    "Tanjore",
-    "Miniature",
-    "Phad",
-    "Pichwai",
-    "Illustrations",
-    "Landscape",
-    "Minimal",
-    "Abstract",
-    "Modern",
-  ];
-
+const Categorys = ({ categorys }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -72,13 +54,10 @@ const Categorys = () => {
         {categorys.map((c, i) => (
           <Link className="h-[185px] border block" key={i} to="#">
             <div className="w-full h-full relative p-3">
-              <img
-                src={`http://localhost:3000/images/paintings/${i + 1}.jpg`}
-                alt=""
-              />
+              <img src={c.image} alt="" />
               <div className="absolute bottom-6 w-full mx-auto font-bold left-0 flex justify-center items-center">
                 <span className="py-[2px] px-6 bg-[#3330305d] text-white">
-                  {c}
+                  {c.name}
                 </span>
               </div>
             </div>

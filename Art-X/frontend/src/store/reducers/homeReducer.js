@@ -21,7 +21,11 @@ export const homeReducer = createSlice({
     categorys: [],
   },
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(get_category.fulfilled, (state, { payload }) => {
+      state.categorys = payload.categorys;
+    });
+  },
 });
 
 export default homeReducer.reducer;
