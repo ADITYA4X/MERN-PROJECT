@@ -15,6 +15,20 @@ export const get_category = createAsyncThunk(
 );
 // End Method
 
+export const get_paintings = createAsyncThunk(
+  "painting/get_paintings",
+  async (_, { fulfillWithValue }) => {
+    try {
+      const { data } = await api.get("/home/get-paintings");
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.respone);
+    }
+  }
+);
+// End Method
+
 export const homeReducer = createSlice({
   name: "home",
   initialState: {

@@ -6,13 +6,15 @@ import FeaturePaintings from "../components/paintings/FeaturePaintings";
 import Paintings from "../components/paintings/Paintings";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { get_category } from "../store/reducers/homeReducer";
+import { get_category, get_paintings } from "../store/reducers/homeReducer";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { categorys } = useSelector((state) => state.home);
+
   useEffect(() => {
     dispatch(get_category());
+    dispatch(get_paintings());
   }, []);
 
   return (
