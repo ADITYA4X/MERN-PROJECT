@@ -3,6 +3,24 @@ const paintingModel = require("../../models/paintingModel");
 const { responseReturn } = require("../../utiles/response");
 
 class homeControllers {
+  formatePainting = (paintings) => {
+    const paintingArray = [];
+    let i = 0;
+    while (i < paintings.length) {
+      let temp = [];
+      let j = i;
+      while (j < i + 3) {
+        if (paintings[j]) {
+          temp.push(paintings[j]);
+        }
+        j++;
+      }
+      paintingArray.push([...temp]);
+      i = j;
+    }
+    return paintingArray;
+  };
+
   get_categorys = async (req, res) => {
     try {
       const categorys = await categoryModel.find({});
@@ -24,7 +42,7 @@ class homeControllers {
       const allPainting1 = await paintingModel.find({}).limit(9).sort({
         createdAt: -1,
       });
-      const latest_painting = this.formateProduct(allPainting1);
+      const latest_painting = this.formatePainting(allPainting1);
 
       const allPainting2 = await paintingModel.find({}).limit(9).sort({
         rating: -1,
@@ -34,7 +52,7 @@ class homeControllers {
       const allPainting3 = await paintingModel.find({}).limit(9).sort({
         discount: -1,
       });
-      const discount_painting = this.formateProduct(allPainting3);
+      const discount_painting = this.formatePainting(allPainting3);
 
       responseReturn(res, 200, {
         paintings,

@@ -33,12 +33,23 @@ export const homeReducer = createSlice({
   name: "home",
   initialState: {
     categorys: [],
+    paintings: [],
+    latest_painting: [],
+    topRated_painting: [],
+    discount_painting: [],
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(get_category.fulfilled, (state, { payload }) => {
-      state.categorys = payload.categorys;
-    });
+    builder
+      .addCase(get_category.fulfilled, (state, { payload }) => {
+        state.categorys = payload.categorys;
+      })
+      .addCase(get_paintings.fulfilled, (state, { payload }) => {
+        state.products = payload.products;
+        state.latest_painting = payload.latest_painting;
+        state.topRated_painting = payload.topRated_painting;
+        state.discount_painting = payload.discount_painting;
+      });
   },
 });
 
