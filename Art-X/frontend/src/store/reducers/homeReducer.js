@@ -45,7 +45,7 @@ export const homeReducer = createSlice({
         state.categorys = payload.categorys;
       })
       .addCase(get_paintings.fulfilled, (state, { payload }) => {
-        state.products = payload.products;
+        state.paintings = payload.paintings;
         state.latest_painting = payload.latest_painting;
         state.topRated_painting = payload.topRated_painting;
         state.discount_painting = payload.discount_painting;
