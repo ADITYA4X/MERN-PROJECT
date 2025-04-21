@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const Paintings = ({ title }) => {
-  const paintings = [
-    [1, 2, 3],
-    [4, 5, 6],
-  ];
-
+const Paintings = ({ title, paintings }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -64,17 +59,23 @@ const Paintings = ({ title }) => {
       >
         {paintings.map((painting, index) => {
           return (
-            <div className="flex flex-col justify-start gap-2">
+            <div key={index} className="flex flex-col justify-start gap-2">
               {painting.map((item, index) => (
-                <Link className="flex justify-center items-start" to="#">
+                <Link
+                  key={index}
+                  className="flex justify-center items-start"
+                  to="#"
+                >
                   <img
                     className="w-[110px] h-[110px]"
-                    src={`http://localhost:3000/images/paintings/${item}.jpg`}
+                    src={item.images[0]}
                     alt=""
                   />
                   <div className="px-3 flex justify-start items-start gap-1 flex-col text-slate-600">
-                    <h2>Painting Name </h2>
-                    <span className="text-lg font-bold">&#8377; 2000 </span>
+                    <h2>{item.name}</h2>
+                    <span className="text-lg font-bold">
+                      &#8377; {item.price}{" "}
+                    </span>
                   </div>
                 </Link>
               ))}

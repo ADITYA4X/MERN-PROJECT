@@ -16,8 +16,11 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-const Header = ({ categorys }) => {
+const Header = () => {
+  const { categorys } = useSelector((state) => state.home);
+
   const { pathname } = useLocation();
 
   const [showSidebar, setShowSidebar] = useState(true);

@@ -6,28 +6,22 @@ import FeaturePaintings from "../components/paintings/FeaturePaintings";
 import Paintings from "../components/paintings/Paintings";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { get_category, get_paintings } from "../store/reducers/homeReducer";
+import { get_paintings } from "../store/reducers/homeReducer";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const {
-    categorys,
-    paintings,
-    latest_painting,
-    topRated_painting,
-    discount_painting,
-  } = useSelector((state) => state.home);
+  const { paintings, latest_painting, topRated_painting, discount_painting } =
+    useSelector((state) => state.home);
 
   useEffect(() => {
-    dispatch(get_category());
     dispatch(get_paintings());
   }, []);
 
   return (
     <div className="w-full">
-      <Header categorys={categorys} />
+      <Header />
       <Banner />
-      <Categorys categorys={categorys} />
+      <Categorys />
       <div className="py-[45px]">
         <FeaturePaintings paintings={paintings} />
       </div>
