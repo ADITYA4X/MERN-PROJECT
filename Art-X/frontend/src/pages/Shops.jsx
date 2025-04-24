@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
@@ -11,27 +11,17 @@ import { FaThList } from "react-icons/fa";
 import { BsFillGridFill } from "react-icons/bs";
 import ShopPaintings from "../components/paintings/ShopPaintings";
 import Pagination from "../components/Pagination";
+import { useDispatch, useSelector } from "react-redux";
 
 const Shops = () => {
-  const [filter, setFilter] = useState(true);
+  const dispatch = useDispatch();
+  const { categorys } = useSelector((state) => state.home);
 
-  const categorys = [
-    "Thangka",
-    "Mithila",
-    "Madhubani",
-    "Warli",
-    "Pattachitra",
-    "Kalamkari",
-    "Tanjore",
-    "Miniature",
-    "Phad",
-    "Pichwai",
-    "Illustrations",
-    "Landscape",
-    "Minimal",
-    "Abstract",
-    "Modern",
-  ];
+  useEffect(() => {
+    dispatch(price_range_painting());
+  }, []);
+
+  const [filter, setFilter] = useState(true);
 
   const [state, setState] = useState({ values: [500, 1500] });
   const [rating, setRating] = useState("");
@@ -83,13 +73,16 @@ const Shops = () => {
               </h2>
               <div className="py-2">
                 {categorys.map((c, i) => (
-                  <div className="flex justify-start items-center gap-2 py-1">
-                    <input type="checkbox" id={c} />
+                  <div
+                    key={i}
+                    className="flex justify-start items-center gap-2 py-1"
+                  >
+                    <input type="checkbox" id={c.name} />
                     <label
                       className="text-stone-600 block cursor-pointer"
-                      htmlFor={c}
+                      htmlFor={c.name}
                     >
-                      {c}
+                      {c.name}
                     </label>
                   </div>
                 ))}
@@ -260,7 +253,7 @@ const Shops = () => {
               </div>
 
               <div className="py-5 flex flex-col gap-4 md:hidden">
-                <Paintings title="Latest Painting" />
+                {/* <Paintings title="Latest Painting" /> */}
               </div>
             </div>
             <div className="w-9/12 md-lg:w-8/12 md:w-full">

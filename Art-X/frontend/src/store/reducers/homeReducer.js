@@ -29,6 +29,20 @@ export const get_paintings = createAsyncThunk(
 );
 // End Method
 
+export const price_range_painting = createAsyncThunk(
+  "painting/price_range_painting",
+  async (_, { fulfillWithValue }) => {
+    try {
+      const { data } = await api.get("/home/price-range-latest-painting");
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.respone);
+    }
+  }
+);
+// End Method
+
 export const homeReducer = createSlice({
   name: "home",
   initialState: {
