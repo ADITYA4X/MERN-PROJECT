@@ -51,6 +51,10 @@ export const homeReducer = createSlice({
     latest_painting: [],
     topRated_painting: [],
     discount_painting: [],
+    priceRange: {
+      low: 0,
+      high: 100,
+    },
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -63,6 +67,10 @@ export const homeReducer = createSlice({
         state.latest_painting = payload.latest_painting;
         state.topRated_painting = payload.topRated_painting;
         state.discount_painting = payload.discount_painting;
+      })
+      .addCase(price_range_painting.fulfilled, (state, { payload }) => {
+        state.latest_painting = payload.latest_painting;
+        state.priceRange = payload.priceRange;
       });
   },
 });

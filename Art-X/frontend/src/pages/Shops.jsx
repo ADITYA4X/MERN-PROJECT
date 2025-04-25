@@ -12,18 +12,29 @@ import { BsFillGridFill } from "react-icons/bs";
 import ShopPaintings from "../components/paintings/ShopPaintings";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
+import { price_range_painting } from "../store/reducers/homeReducer";
 
 const Shops = () => {
   const dispatch = useDispatch();
-  const { categorys } = useSelector((state) => state.home);
+  const { paintings, categorys, priceRange, latest_painting } = useSelector(
+    (state) => state.home
+  );
 
   useEffect(() => {
     dispatch(price_range_painting());
   }, []);
 
+  useEffect(() => {
+    setState({
+      values: [priceRange.low, priceRange.high],
+    });
+  }, [priceRange]);
+
   const [filter, setFilter] = useState(true);
 
-  const [state, setState] = useState({ values: [500, 1500] });
+  const [state, setState] = useState({
+    values: [priceRange.low, priceRange.high],
+  });
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
   const [parPage, setParPage] = useState(1);
@@ -95,8 +106,8 @@ const Shops = () => {
 
                 <Range
                   step={50}
-                  min={500}
-                  max={1500}
+                  min={priceRange.low}
+                  max={priceRange.high}
                   values={state.values}
                   onChange={(values) => setState({ values })}
                   renderTrack={({ props, children }) => (
@@ -253,7 +264,10 @@ const Shops = () => {
               </div>
 
               <div className="py-5 flex flex-col gap-4 md:hidden">
-                {/* <Paintings title="Latest Painting" /> */}
+                <Paintings
+                  title="Latest Painting"
+                  paintings={latest_painting}
+                />
               </div>
             </div>
             <div className="w-9/12 md-lg:w-8/12 md:w-full">
