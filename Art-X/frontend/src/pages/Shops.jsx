@@ -40,6 +40,16 @@ const Shops = () => {
   const [parPage, setParPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
+  const [sortPrice, setSortPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const queryCategory = (e, value) => {
+    if (e.target.checked) {
+      setCategory(value);
+    } else {
+      setCategory("");
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -88,9 +98,14 @@ const Shops = () => {
                     key={i}
                     className="flex justify-start items-center gap-2 py-1"
                   >
-                    <input type="checkbox" id={c.name} />
+                    <input
+                      checked={category === c.name ? true : false}
+                      onChange={(e) => queryCategory(e, c.name)}
+                      type="checkbox"
+                      id={c.name}
+                    />
                     <label
-                      className="text-stone-600 block cursor-pointer"
+                      className="text-slate-600 block cursor-pointer"
                       htmlFor={c.name}
                     >
                       {c.name}
@@ -278,6 +293,7 @@ const Shops = () => {
                   </h2>
                   <div className="flex justify-center items-center gap-3">
                     <select
+                      onChange={(e) => setSortPrice(e.target.value)}
                       className="p-1 border outline-0 text-stone-600 font-semibold"
                       name=""
                       id=""

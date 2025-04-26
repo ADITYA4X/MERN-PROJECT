@@ -75,6 +75,7 @@ class homeControllers {
       const paintings = await paintingModel.find({}).limit(9).sort({
         createdAt: -1, // 1 for asc -1 is for Desc
       });
+
       const latest_painting = this.formatePainting(paintings);
       const getForPrice = await paintingModel.find({}).sort({
         price: 1,
