@@ -43,6 +43,22 @@ export const price_range_painting = createAsyncThunk(
 );
 // End Method
 
+export const query_paintings = createAsyncThunk(
+  "painting/query_paintings",
+  async (query, { fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(
+        `/home/query-paintings?category=${query.category}&&rating=${query.rating}&&lowPrice=${query.low}&&highPrice=${query.high}&&sortPrice=${query.sortPrice}&&pageNumber=${query.pageNumber} `
+      );
+      //  console.log(data)
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.respone);
+    }
+  }
+);
+// End Method
+
 export const homeReducer = createSlice({
   name: "home",
   initialState: {

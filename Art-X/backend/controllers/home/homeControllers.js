@@ -94,6 +94,11 @@ class homeControllers {
   };
 
   // end method
+
+  query_paintings = async (req, res) => {
+    console.log(req.query);
+  };
+  // end method
 }
 
 module.exports = new homeControllers();

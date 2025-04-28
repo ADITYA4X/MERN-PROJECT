@@ -10,4 +10,6 @@ router.get(
   homeControllers.price_range_painting
 );
 
+router.get("/query-paintings", homeControllers.query_paintings);
+
 module.exports = router;

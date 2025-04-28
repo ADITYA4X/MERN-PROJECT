@@ -12,7 +12,10 @@ import { BsFillGridFill } from "react-icons/bs";
 import ShopPaintings from "../components/paintings/ShopPaintings";
 import Pagination from "../components/Pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { price_range_painting } from "../store/reducers/homeReducer";
+import {
+  price_range_painting,
+  query_paintings,
+} from "../store/reducers/homeReducer";
 
 const Shops = () => {
   const dispatch = useDispatch();
@@ -49,6 +52,26 @@ const Shops = () => {
       setCategory("");
     }
   };
+
+  useEffect(() => {
+    dispatch(
+      query_paintings({
+        low: state.values[0],
+        high: state.values[1],
+        category,
+        rating,
+        sortPrice,
+        pageNumber,
+      })
+    );
+  }, [
+    state.values[0],
+    state.values[1],
+    category,
+    rating,
+    sortPrice,
+    pageNumber,
+  ]);
 
   return (
     <div>
