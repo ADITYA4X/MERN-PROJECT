@@ -40,7 +40,7 @@ const Shops = () => {
   });
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
-  const [parPage, setParPage] = useState(1);
+  const [perPage, setPerPage] = useState(1);
   const [pageNumber, setPageNumber] = useState(1);
 
   const [sortPrice, setSortPrice] = useState("");
@@ -354,7 +354,7 @@ const Shops = () => {
                     pageNumber={pageNumber}
                     setPageNumber={setPageNumber}
                     totalItem={10}
-                    parPage={parPage}
+                    perPage={perPage}
                     showItem={Math.floor(10 / 3)}
                   />
                 </div>

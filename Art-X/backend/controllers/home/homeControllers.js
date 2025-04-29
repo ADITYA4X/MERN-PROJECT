@@ -1,6 +1,7 @@
 const categoryModel = require("../../models/categoryModel");
 const paintingModel = require("../../models/paintingModel");
 const { responseReturn } = require("../../utiles/response");
+const { queryPaintings } = require("../../utiles/queryPaintings");
 
 class homeControllers {
   formatePainting = (paintings) => {
@@ -97,6 +98,18 @@ class homeControllers {
 
   query_paintings = async (req, res) => {
     console.log(req.query);
+
+    const perPage = 12;
+    req.query.perPage = perPage;
+
+    try {
+      const paintings = await paintingModel.find({}).sort({
+        createdAt: -1,
+      });
+      const totalPainting = new this.queryPaintings();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
   // end method
 }
