@@ -64,6 +64,8 @@ export const homeReducer = createSlice({
   initialState: {
     categorys: [],
     paintings: [],
+    totalPainting: 0,
+    perPage: 3,
     latest_painting: [],
     topRated_painting: [],
     discount_painting: [],
@@ -87,6 +89,11 @@ export const homeReducer = createSlice({
       .addCase(price_range_painting.fulfilled, (state, { payload }) => {
         state.latest_painting = payload.latest_painting;
         state.priceRange = payload.priceRange;
+      })
+      .addCase(query_paintings.fulfilled, (state, { payload }) => {
+        state.paintings = payload.paintings;
+        state.totalPainting = payload.totalPainting;
+        state.perPage = payload.perPage;
       });
   },
 });

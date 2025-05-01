@@ -106,7 +106,28 @@ class homeControllers {
       const paintings = await paintingModel.find({}).sort({
         createdAt: -1,
       });
-      const totalPainting = new this.queryPaintings();
+
+      const totalPainting = new queryPaintings(products, req.query)
+        .categoryQuery()
+        .ratingQuery()
+        .priceQuery()
+        .sortByPrice()
+        .countPaintings();
+
+      const result = new queryPaintings(paintings, req.query)
+        .categoryQuery()
+        .ratingQuery()
+        .priceQuery()
+        .sortByPrice()
+        .limit()
+        .skip()
+        .getPaintings();
+
+      responseReturn(res, 200, {
+        paintings: result,
+        totalPainting,
+        perPage,
+      });
     } catch (error) {
       console.log(error.message);
     }

@@ -19,9 +19,14 @@ import {
 
 const Shops = () => {
   const dispatch = useDispatch();
-  const { paintings, categorys, priceRange, latest_painting } = useSelector(
-    (state) => state.home
-  );
+  const {
+    paintings,
+    categorys,
+    priceRange,
+    latest_painting,
+    totalPainting,
+    perPage,
+  } = useSelector((state) => state.home);
 
   useEffect(() => {
     dispatch(price_range_painting());
@@ -40,7 +45,7 @@ const Shops = () => {
   });
   const [rating, setRating] = useState("");
   const [styles, setStyles] = useState("grid");
-  const [perPage, setPerPage] = useState(1);
+
   const [pageNumber, setPageNumber] = useState(1);
 
   const [sortPrice, setSortPrice] = useState("");
@@ -346,17 +351,19 @@ const Shops = () => {
                   </div>
                 </div>
                 <div className="pb-8">
-                  <ShopPaintings styles={styles} />
+                  <ShopPaintings paintings={paintings} styles={styles} />
                 </div>
 
                 <div>
-                  <Pagination
-                    pageNumber={pageNumber}
-                    setPageNumber={setPageNumber}
-                    totalItem={10}
-                    perPage={perPage}
-                    showItem={Math.floor(10 / 3)}
-                  />
+                  {totalPainting > perPage && (
+                    <Pagination
+                      pageNumber={pageNumber}
+                      setPageNumber={setPageNumber}
+                      totalItem={totalPainting}
+                      parPage={perPage}
+                      showItem={Math.floor(totalPainting / perPage)}
+                    />
+                  )}
                 </div>
               </div>
             </div>

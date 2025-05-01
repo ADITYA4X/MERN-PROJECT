@@ -34,11 +34,11 @@ class queryPaintings {
   sortByPrice = () => {
     if (this.query.sortPrice) {
       if (this.query.sortPrice === "low-to-high") {
-        this.paintings = this.paintings.short(function (a, b) {
+        this.paintings = this.paintings.sort(function (a, b) {
           return a.price - b.price;
         });
       } else {
-        this.paintings = this.paintings.short(function (a, b) {
+        this.paintings = this.paintings.sort(function (a, b) {
           return b.price - a.price;
         });
       }
@@ -48,11 +48,11 @@ class queryPaintings {
 
   skip = () => {
     let { pageNumber } = this.query;
-    const skipPage = (parseInt(pageNumber) - 1) * this.query.parPage;
+    const skipPage = (parseInt(pageNumber) - 1) * this.query.perPage;
     let skipPainting = [];
 
     for (let i = skipPage; i < this.paintings.length; i++) {
-      skipPaintings.push(this.paintings[i]);
+      skipPainting.push(this.paintings[i]);
     }
     this.paintings = skipProduct;
     return this;
@@ -60,8 +60,8 @@ class queryPaintings {
 
   limit = () => {
     let temp = [];
-    if (this.paintings.length > this.query.parPage) {
-      for (let i = 0; i < this.query.parPage; i++) {
+    if (this.paintings.length > this.query.perPage) {
+      for (let i = 0; i < this.query.perPage; i++) {
         temp.push(this.paintings[i]);
       }
     } else {
