@@ -3,7 +3,7 @@ import { FaEye, FaRegHeart } from "react-icons/fa";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Rating from "../Rating";
 
-const ShopPaintings = ({ styles }) => {
+const ShopPaintings = ({ styles, paintings }) => {
   return (
     <div
       className={`w-full grid ${
@@ -12,7 +12,7 @@ const ShopPaintings = ({ styles }) => {
           : "grid-cols-1 md-lg:grid-cols-2 md:grid-cols-2"
       } gap-3 `}
     >
-      {[1, 2, 3, 4, 5, 6].map((p, i) => (
+      {paintings.map((p, i) => (
         <div
           key={i}
           className={`flex transition-all duration-1000 hover:shadow-md hover:-translate-y-3 ${
@@ -30,7 +30,7 @@ const ShopPaintings = ({ styles }) => {
           >
             <img
               className="h-[240px] rounded-md md:h-[270px] xs:h-[170px] w-full"
-              src={`http://localhost:3000/images/paintings/${i + 1}.jpg`}
+              src={p.images[0]}
               alt=""
             />
 
@@ -48,11 +48,11 @@ const ShopPaintings = ({ styles }) => {
           </div>
 
           <div className="flex justify-start items-start flex-col gap-1">
-            <h2 className="font-bold">Product Name </h2>
+            <h2 className="font-bold">{p.name} </h2>
             <div className="flex justify-start items-center gap-3">
-              <span className="text-md font-semibold">$656</span>
+              <span className="text-md font-semibold"> &#8377; {p.price}</span>
               <div className="flex">
-                <Rating ratings={4.5} />
+                <Rating ratings={p.rating} />
               </div>
             </div>
           </div>
