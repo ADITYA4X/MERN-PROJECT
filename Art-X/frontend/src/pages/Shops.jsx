@@ -78,6 +78,20 @@ const Shops = () => {
     pageNumber,
   ]);
 
+  const resetRating = () => {
+    setRating("");
+    dispatch(
+      query_paintings({
+        low: state.values[0],
+        high: state.values[1],
+        category,
+        rating: "",
+        sortPrice,
+        pageNumber,
+      })
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -286,7 +300,10 @@ const Shops = () => {
                     </span>
                   </div>
 
-                  <div className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer">
+                  <div
+                    onClick={resetRating}
+                    className="text-stone-500 flex justify-start items-start gap-2 text-xl cursor-pointer"
+                  >
                     <span>
                       <CiStar />{" "}
                     </span>

@@ -119,8 +119,8 @@ class homeControllers {
         .ratingQuery()
         .priceQuery()
         .sortByPrice()
-        .limit()
         .skip()
+        .limit()
         .getPaintings();
 
       responseReturn(res, 200, {
