@@ -407,7 +407,12 @@ const Header = () => {
                           className="w-[30px] h-[30px] rounded-full overflow-hidden"
                           alt=""
                         />
-                        <Link className="text-sm block">{c.name}</Link>
+                        <Link
+                          to={`/paintings?category=${c.name}`}
+                          className="text-sm block"
+                        >
+                          {c.name}
+                        </Link>
                       </li>
                     );
                   })}
