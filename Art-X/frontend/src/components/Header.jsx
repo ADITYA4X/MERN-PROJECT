@@ -13,12 +13,14 @@ import { FaTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const { categorys } = useSelector((state) => state.home);
 
   const { pathname } = useLocation();
@@ -31,6 +33,10 @@ const Header = () => {
 
   const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState("");
+
+  const search = () => {
+    navigate(`/products/search?category=${category}&&value=${searchValue}`);
+  };
 
   return (
     <div className="w-full bg-white">
@@ -435,7 +441,7 @@ const Header = () => {
                       <option value="">Select Category</option>
 
                       {categorys.map((c, i) => (
-                        <option value={c}>{c.name}</option>
+                        <option value={c.name}>{c.name}</option>
                       ))}
                     </select>
                   </div>
@@ -447,7 +453,10 @@ const Header = () => {
                     id=""
                     placeholder="Search here..."
                   />
-                  <button className="bg-stone-600 right-0 absolute px-8 h-full font-semibold uppercase text-white">
+                  <button
+                    onClick={search}
+                    className="bg-stone-600 right-0 absolute px-8 h-full font-semibold uppercase text-white"
+                  >
                     Search
                   </button>
                 </div>
