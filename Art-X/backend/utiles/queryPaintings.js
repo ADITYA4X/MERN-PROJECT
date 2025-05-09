@@ -24,6 +24,17 @@ class queryPaintings {
     return this;
   };
 
+  searchQuery = () => {
+    this.paintings = this.query.searchValue
+      ? this.paintings.filter(
+          (p) =>
+            p.name.toUpperCase().indexOf(this.query.searchValue.toUpperCase()) >
+            -1
+        )
+      : this.paintings;
+    return this;
+  };
+
   priceQuery = () => {
     this.paintings = this.paintings.filter(
       (p) =>

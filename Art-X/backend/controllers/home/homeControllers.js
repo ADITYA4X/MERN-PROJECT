@@ -110,6 +110,7 @@ class homeControllers {
       const totalPainting = new queryPaintings(products, req.query)
         .categoryQuery()
         .ratingQuery()
+        .searchQuery()
         .priceQuery()
         .sortByPrice()
         .countPaintings();
@@ -118,6 +119,7 @@ class homeControllers {
         .categoryQuery()
         .ratingQuery()
         .priceQuery()
+        .searchQuery()
         .sortByPrice()
         .skip()
         .limit()
