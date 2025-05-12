@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaInstagram } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { customer_register } from "../store/reducers/authReducer";
 
 const Register = () => {
   const [state, setState] = useState({
@@ -10,6 +12,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+  const dispatch = useDispatch();
 
   const inputHandle = (e) => {
     setState({
@@ -21,6 +25,7 @@ const Register = () => {
   const register = (e) => {
     e.preventDefault();
     console.log(state);
+    dispatch(customer_register(state));
   };
 
   return (
