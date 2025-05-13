@@ -21,6 +21,7 @@ app.use("/api", require("./routes/authRoutes"));
 app.use("/api", require("./routes/dashboard/categoryRoutes"));
 app.use("/api", require("./routes/dashboard/paintingRoutes"));
 app.use("/api", require("./routes/dashboard/sellerRoutes"));
+app.use("/api", require("./routes/home/customerAuthRoutes"));
 
 app.get("/", (req, res) => res.send("My backend"));
 const port = process.env.PORT;
